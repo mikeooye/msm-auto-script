@@ -1,9 +1,6 @@
-var rect = require('./rect');
+var { rect } = require('./modules/rect');
 
-for (var index = 0; index < 12; index++) {
-  console.log(rect.missionMainBounds(index));
-}
+var fun = rect("1 2 3 4");
 
-var newRect = rect.missionMainBounds(0);
-console.log(newRect.centerX());
-
+console.log(fun);
+console.log(fun.center());
