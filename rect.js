@@ -1,51 +1,30 @@
-var windowWidth = 2560;
-var windowHeight = 1600;
-var missionMarginV = 78;
 
-Object.prototype.centerX = function() {
-  return this.width * 0.5 + this.x;
-};
-Object.prototype.centerY = function() {
-  return this.y + this.height * 0.5;
-};
 
-var rect = {
-  missionMainBounds: function(index) {
-    var top = 400;
-    var left = 30;
-    var spaceH = 8;
-    var spaceV = 14;
-    var width = 436;
-    var height = 540;
+var _rect = function(x, y, w, h) {
+  this.x = x;
+  this.y = y;
+  this.width = w;
+  this.height = h;
+}
 
-    var row = index % 2;
-    var column = parseInt(index / 2);
-
-    return {
-      x: left + column * (width + spaceH),
-      y: top + row * (height + spaceV),
-      width: width,
-      height: height
-    };
-  },
-  // 任务返回按钮
-  missionBackBounds: { x: 40, y: 124, width: 80, height: 80 },
-  // 任务关闭按钮
-  missionCloseBounds: { x: 2560 - 38 - 76, y: 120, width: 76, height: 76 },
-
-  // 每日任务
-  dayMission: {
-    // 奖励按钮范围
-    bonusItemBounds: function(index) {
-      var top = 295;
-      var left = 20;
-      var width = 503;
-      var height = 180;
-      return { x: left + index * width, y: top, width: width, height: height };
-    },
-    // 进入按钮
-    goBounds: { x: 1964, y: 1344, width: 560, height: 130 }
-  }
+// Object 增加 center 方法
+Object.prototype.center = function () {
+  return { x: this.x + this.width * 0.5, y: this.y + this.height * 0.5};
 };
 
-module.exports = rect;
+// 分解字符串，转化为 _rect，要求格式 "minx miny maxx maxy"
+var rect = function(desc) {
+  var points = desc.split(" ");
+  var x = parseInt(points[0]);
+  var y = parseInt(points[1]);
+  var width = points[2] - x;
+  var height = points[3] - y;
+
+  var rectObj = new _rect(x, y, width, height);
+
+  return rectObj;
+}
+
+
+
+module.exports = { raw: _rect, make: rect };
