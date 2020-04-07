@@ -89,27 +89,27 @@ if (mode === 0) {
 
   if (!stages || stages.contains(2)) {
     doJinhuaRenwu();
-    waitAndClearAds;
+    waitAndClearAds();
   }
 
   if (!stages || stages.contains(3)) {
     doJingyingRenwu();
-    waitAndClearAds;
+    waitAndClearAds();
   }
   
   if (!stages || stages.contains(4)) {
     doDaoguanRenwu();
-    waitAndClearAds;
+    waitAndClearAds();
   }
 
   if (!stages || stages.contains(5)) {
     doJinzitaRenwu();
-    waitAndClearAds;
+    waitAndClearAds();
   }
 
   if (!stages || stages.contains(6)) {
     doMiniRenwu();
-    waitAndClearAds;
+    waitAndClearAds();
   }
 }
 
