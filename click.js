@@ -1,10 +1,10 @@
-var config = require('./config');
 
 var window;
+var SIMULATOR = false;
 
 var _click = function(x, y) {
 
-  if (config.SIMULATOR === 1) {
+  if (SIMULATOR === 1) {
     Tap(x, y);
   } else {
     click(x, y);
@@ -31,7 +31,10 @@ var _clickRect = function(rect, delay) {
 
 var Click = {
   click: _click,
-  clickRect: _clickRect
+  clickRect: _clickRect,
+  init: function(simulator) {
+    SIMULATOR = simulator;
+  }
 };
 
 module.exports = Click;

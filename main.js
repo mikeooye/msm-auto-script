@@ -1,8 +1,62 @@
 var C = require("./click");
 var E = require("./element");
 var P = require("./player");
-var Config = require('./config');
 
+auto();
+
+var simulator = dialogs.select("设备类型？", ["是模拟器", "是真机"]) === 0;
+C.init(simulator);
+
+var mode = dialogs.select("运行模式", [
+  "主线任务",
+  "全票每日任务",
+  "快速每日任务"
+]);
+
+function selectPlayer() {
+  var selection = dialogs.select("玩家", [
+    "calbeec",
+    "marair",
+    "ifufo",
+    "ocma"
+  ]);
+  switch (selection) {
+    case "calbeec":
+      return P.calbeec;
+    case "marair":
+      return P.marair;
+    case "ifufo":
+      return P.ifufo;
+    default:
+      return P.ocma;
+  }
+}
+
+var stages = null;
+if (mode > 0) {
+  var choice = [
+    "工会",
+    "每日任务",
+    "进化系统",
+    "精英boss",
+    "熊猫道馆",
+    "金字塔任务",
+    "mini地图"
+  ];
+  stages = dialogs.multiChoice("选择关卡", choice, [0, 1, 2, 3, 4, 5, 6]);
+}
+
+Array.prototype.contains = function(e) {
+  return this.indexOf(e) !== -1;
+}
+
+// 等待5秒钟，并清空一轮广告
+function waitAndClearAds() {
+  loopAds();
+  sleep(5000);
+}
+
+var player = selectPlayer();
 
 //请求截图
 if (!requestScreenCapture()) {
@@ -10,53 +64,51 @@ if (!requestScreenCapture()) {
   exit();
 }
 
-// var appName = "메이플스토리M";
-// var pkgName = "com.nexon.nsc.maplem";
-
-// app.launchPackage(pkgName);
-// console.log("launching");
-// waitForPackage(pkgName);
-
-// console.log("finish launch");
-
 sleep(2000);
 
-// var players = P.all();
-// [this.calbeec, this.marair, this.ifufo, this.ocma];
-
-var _player = P[Config.CURRENT_PLAYER];
-
-if (Config.MODE === 0) {
-  doMainMission(_player);
+if (mode === 0) {
+  doMainMission();
 } else {
-  if (_player.hasClub) {
+  if ((!stages || stages.contains(0)) && player.hasClub) {
     doClub();
-    sleep(5000);
-    loopAds();
+    waitAndClearAds();
   }
 
-  doMeiriRenwu();
-  loopAds();
-  sleep(5000);
-  doJinhuaRenwu(_player);
-  loopAds();
-  sleep(5000);
-  doJingyingRenwu(_player);
-  loopAds();
-  sleep(5000);
-  doDaoguanRenwu();
-  loopAds();
-  sleep(5000);
-  doJinzitaRenwu(_player);
-  loopAds();
-  sleep(5000);
-  doMiniRenwu();
+  if (!stages || stages.contains(1)) {
+    doMeiriRenwu();
+    waitAndClearAds();
+  }
+
+  if (!stages || stages.contains(2)) {
+    doJinhuaRenwu();
+    waitAndClearAds;
+  }
+
+  if (!stages || stages.contains(3)) {
+    doJingyingRenwu();
+    waitAndClearAds;
+  }
+  
+  if (!stages || stages.contains(4)) {
+    doDaoguanRenwu();
+    waitAndClearAds;
+  }
+
+  if (!stages || stages.contains(5)) {
+    doJinzitaRenwu();
+    waitAndClearAds;
+  }
+
+  if (!stages || stages.contains(6)) {
+    doMiniRenwu();
+    waitAndClearAds;
+  }
 }
 
 // ------------------
 // 每日任务
 function doMeiriRenwu() {
-  var ticket = Config.MODE === 1 ? 3: 1;
+  var ticket = Config.MODE === 1 ? 3 : 1;
 
   E.children.caidan.autoClick();
   E.children.caidan.children.renwu.autoClick();
@@ -83,11 +135,11 @@ function doMeiriRenwu() {
 }
 
 // 进化系统，限制 level >= 100
-function doJinhuaRenwu(player) {
+function doJinhuaRenwu() {
   if (player.level < 100) {
     return;
   }
-  var ticket = Config.MODE === 1 ? 3: 1;
+  var ticket = Config.MODE === 1 ? 3 : 1;
 
   E.children.caidan.autoClick();
   E.children.caidan.children.renwu.autoClick();
@@ -111,8 +163,8 @@ function doJinhuaRenwu(player) {
   task.children.quit.autoClick();
 }
 
-function doJingyingRenwu(player) {
-  var ticket = Config.MODE === 1 ? 3: 1;
+function doJingyingRenwu() {
+  var ticket = Config.MODE === 1 ? 3 : 1;
 
   E.children.caidan.autoClick();
   E.children.caidan.children.renwu.autoClick();
@@ -142,7 +194,7 @@ function doJingyingRenwu(player) {
 }
 
 function doDaoguanRenwu() {
-  var ticket = Config.MODE === 1 ? 3: 1;
+  var ticket = Config.MODE === 1 ? 3 : 1;
 
   E.children.caidan.autoClick();
   E.children.caidan.children.renwu.autoClick();
@@ -199,7 +251,7 @@ function doMiniRenwu() {
   mini.children.quit.autoClick();
 }
 
-function doJinzitaRenwu(player) {
+function doJinzitaRenwu() {
   if (player.level < 60) {
     return;
   }
@@ -224,7 +276,7 @@ function doJinzitaRenwu(player) {
 }
 
 // 主线任务
-function doMainMission(player) {
+function doMainMission() {
   E.children.mainline.getNew.click(1500);
   while (true) {
     // 任务npc同时可以选择两个任务情况下，选择下面那个
@@ -251,48 +303,6 @@ function doMainMission(player) {
 
     sleep(1000);
   }
-}
-
-// 穿新装备
-function wearNewSet() {
-  var screen = captureScreen();
-  var skillPointCheck = detectColorAndClick(CYAN, 2330, 611, screen);
-  if (skillPointCheck) {
-    return;
-  }
-  var firstCheck = detectColorAndClick("#548fba", 2094, 712, screen, true);
-  if (firstCheck) {
-    detectColorAndClick("#ff7b50", 2360, 725, screen);
-  }
-}
-
-function detectColorAndClick(color, x, y, screen, noclick) {
-  var colorsArray = color;
-  if (typeof color === "string") {
-    colorsArray = [color];
-  }
-
-  if (!screen) {
-    screen = captureScreen();
-  }
-
-  for (var index = 0; index < colorsArray.length; index++) {
-    var tcolor = colorsArray[index];
-    if (images.detectsColor(screen, tcolor, x, y)) {
-      // 检测到颜色
-      if (!noclick) {
-        traceClick(x, y);
-        sleep(500);
-      }
-      return true;
-    }
-  }
-
-  var pixel = images.pixel(screen, x, y);
-  console.log("point pixel", x, y, colors.toString(pixel), "target", color);
-
-  sleep(500);
-  return false;
 }
 
 // 遍历广告关闭按钮
@@ -324,38 +334,12 @@ function loopAds() {
   }
 }
 
-function waitColorAndClick(tcolor, x, y) {
-  sleep(500);
-  var notFind = true;
-  while (notFind) {
-    var screen = captureScreen();
-
-    var pixel = images.pixel(screen, x, y);
-    console.log("point pixel", x, y, colors.toString(pixel), "target", tcolor);
-    if (images.detectsColor(screen, tcolor, x, y)) {
-      // 检测到颜色
-      notFind = false;
-      traceClick(x, y);
-    }
-
-    if (notFind) {
-      // 没有检测到
-      sleep(1000);
-    }
-  }
-}
-
 function traceClickPoint(p, delay) {
   console.log(p);
   traceClick(p.x, p.y, delay);
 }
 
 function traceClick(x, y, delay) {
-  // var window = floaty.rawWindow(<frame gravity="center" bg="#88ff0000" />);
-  // window.touchable = false;
-
-  // window.setSize(40, 40);
-  // window.setPosition(x - 20, y - 20);
 
   var delay = delay || 500;
   sleep(delay);
@@ -363,8 +347,4 @@ function traceClick(x, y, delay) {
   C.click(x, y);
 
   sleep(300);
-
-  // setTimeout(() => {
-  //   w.close();
-  // }, 500);
 }
