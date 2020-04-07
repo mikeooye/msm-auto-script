@@ -20,12 +20,16 @@ function selectPlayer() {
     "ifufo",
     "ocma"
   ]);
+  console.log(selection);
+  console.log(typeof selection);
+  
+
   switch (selection) {
-    case "calbeec":
+    case 0:
       return P.calbeec;
-    case "marair":
+    case 1:
       return P.marair;
-    case "ifufo":
+    case 2:
       return P.ifufo;
     default:
       return P.ocma;
@@ -57,6 +61,10 @@ function waitAndClearAds() {
 }
 
 var player = selectPlayer();
+console.log(player);
+
+console.log(stages);
+
 
 //请求截图
 if (!requestScreenCapture()) {
@@ -108,7 +116,7 @@ if (mode === 0) {
 // ------------------
 // 每日任务
 function doMeiriRenwu() {
-  var ticket = Config.MODE === 1 ? 3 : 1;
+  var ticket = mode === 1 ? 3 : 1;
 
   E.children.caidan.autoClick();
   E.children.caidan.children.renwu.autoClick();
@@ -139,7 +147,7 @@ function doJinhuaRenwu() {
   if (player.level < 100) {
     return;
   }
-  var ticket = Config.MODE === 1 ? 3 : 1;
+  var ticket = mode === 1 ? 3 : 1;
 
   E.children.caidan.autoClick();
   E.children.caidan.children.renwu.autoClick();
@@ -164,7 +172,7 @@ function doJinhuaRenwu() {
 }
 
 function doJingyingRenwu() {
-  var ticket = Config.MODE === 1 ? 3 : 1;
+  var ticket = mode === 1 ? 3 : 1;
 
   E.children.caidan.autoClick();
   E.children.caidan.children.renwu.autoClick();
@@ -194,7 +202,7 @@ function doJingyingRenwu() {
 }
 
 function doDaoguanRenwu() {
-  var ticket = Config.MODE === 1 ? 3 : 1;
+  var ticket = mode === 1 ? 3 : 1;
 
   E.children.caidan.autoClick();
   E.children.caidan.children.renwu.autoClick();
