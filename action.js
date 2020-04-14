@@ -151,7 +151,7 @@ var buyEquipment = function () {
 };
 
 var missions = {
-  prepare: function() {
+  prepare: function () {
     N.missions.menu.checkClick(captureScreen());
     sleep(500);
     N.missions.mission.checkClick(captureScreen());
@@ -185,8 +185,8 @@ var missions = {
     N.missions.meiriBack.checkClick(captureScreen());
     sleep(500);
   },
-  jinhuaxitong: function(level) {
-    var ticket = 1;
+  jinhuaxitong: function (level) {
+    var ticket = 2;
     N.missions.jinhuaxitong.checkClick(captureScreen());
     sleep(500);
     // N.missions.jinhuaxitongBonusExpTab.checkClick(captureScreen());
@@ -195,13 +195,18 @@ var missions = {
     sleep(500);
     N.missions.jinhuaxitongBonusLevelTab.checkClick(captureScreen());
     sleep(500);
+    N.missions.jinhuaxitongBonusLevelOp.checkClick(captureScreen());
+    sleep(500);
     if (level >= 120) {
       //等级过低可能会打不动boss，造成任务失败
-      N.missions.jinhuaxitongBonusBossTab.checkClick(captureScreen()); sleep(500);
-      N.missions.jinhuaxitongBonusBossOp.checkClick(captureScreen()); sleep(500);
+      N.missions.jinhuaxitongBonusBossTab.checkClick(captureScreen());
+      sleep(500);
+      N.missions.jinhuaxitongBonusBossOp.checkClick(captureScreen());
+      sleep(500);
     }
-    N.missions.jinhuaxitongBonusLevelOp.checkClick(captureScreen());
+    toast("手动调整时间");
     sleep(5000);
+
     N.missions.jinhuaxitongGo.checkClick(captureScreen());
     sleep(500);
     N.missions.jinhuaxitongConfirm.checkClick(captureScreen());
@@ -219,7 +224,7 @@ var missions = {
     N.missions.jinhuaxitongBack.checkClick(captureScreen());
     sleep(500);
   },
-  wulingdaoguan: function() {
+  wulingdaoguan: function () {
     var ticket = 1;
     N.missions.wulingdaoguan.checkClick(captureScreen());
     sleep(500);
@@ -240,69 +245,132 @@ var missions = {
     N.missions.wulingdaoguanBack.checkClick(captureScreen());
     sleep(500);
   },
-  gonghui: function() {
-    N.missions.gonghui.checkClick(captureScreen()); sleep(500);
-    N.missions.gonghuirenwu.checkClick(captureScreen()); sleep(500);
-    N.missions.gonghuirenwuGo.checkClick(captureScreen()); sleep(500);
-    N.missions.gonghuirenwuContinue.checkClick(captureScreen()); sleep(500);
-    N.missions.gonghuirenwuMenu.checkClick(captureScreen()); sleep(500);
-    N.missions.gonghuirenwuBonus.checkClick(captureScreen()); sleep(500);
-    N.missions.gonghuirenwuBack.checkClick(captureScreen()); sleep(500);
-    N.missions.gonghuiSignTab.checkClick(captureScreen()); sleep(500);
-    N.missions.gonghuiSign.checkClick(captureScreen()); sleep(500);
-    N.missions.gonghuiGiveTab.checkClick(captureScreen()); sleep(500);
-    N.missions.gonghuiGive.checkClick(captureScreen()); sleep(500);
-    N.missions.gonghuiBack.checkClick(captureScreen()); sleep(500);
-    N.missions.prepare(); sleep();
+  gonghui: function () {
+    N.missions.gonghui.checkClick(captureScreen());
+    sleep(500);
+    N.missions.gonghuirenwu.checkClick(captureScreen());
+    sleep(500);
+    N.missions.gonghuirenwuGo.checkClick(captureScreen());
+    sleep(500);
+    N.missions.gonghuirenwuContinue.checkClick(captureScreen());
+    sleep(500);
+    N.missions.gonghuirenwuMenu.checkClick(captureScreen());
+    sleep(500);
+    N.missions.gonghuirenwuBonus.checkClick(captureScreen());
+    sleep(500);
+    N.missions.gonghuirenwuBack.checkClick(captureScreen());
+    sleep(500);
+    N.missions.gonghuiSignTab.checkClick(captureScreen());
+    sleep(500);
+    N.missions.gonghuiSign.checkClick(captureScreen());
+    sleep(500);
+    N.missions.gonghuiGiveTab.checkClick(captureScreen());
+    sleep(500);
+    N.missions.gonghuiGive.checkClick(captureScreen());
+    sleep(500);
+    N.missions.gonghuiBack.checkClick(captureScreen());
+    sleep(500);
+    missions.prepare();
+    sleep(500);
   },
-  jingyingboss: function() {
-    var ticket = 1;
-    N.missions.jingyingboss.checkClick(captureScreen()); sleep(500);
-    for (var cost=0; cost < ticket; cost ++) {
-      N.missions.jingyingbossOp.checkClick(captureScreen()); sleep(2500);
-      N.missions.jingyingbossHard.checkClick(captureScreen()); sleep(500);
-      N.missions.jingyingbossGo.checkClick(captureScreen()); sleep(500);
-      N.missions.jingyingbossConfirm.checkClick(captureScreen()); sleep(500);
-      N.missions.jingyingbossMenu.checkClick(captureScreen()); sleep(500);
+  jingyingboss: function (attack) {
+    var ticket = 2;
+    N.missions.jingyingboss.checkClick(captureScreen());
+    sleep(500);
+    var opMinus = 0;
+    switch (attack) {
+      case 10: {
+        opMinus = 0;
+        break;
+      }
+      case 8: {
+        opMinus = 2;
+        break;
+      }
+      case 6: {
+        opMinus = 4;
+        break;
+      }
+      default: {
+        opMinus = 6;
+        break;
+      }
     }
-    N.missions.jingyingbossBack.checkClick(captureScreen()); sleep(500);
+    for (var cost = 0; cost < ticket; cost++) {
+      N.missions.jingyingbossOp(opMinus).checkClick(captureScreen());
+      sleep(2500);
+      N.missions.jingyingbossHard.checkClick(captureScreen());
+      sleep(500);
+      N.missions.jingyingbossGo.checkClick(captureScreen());
+      sleep(500);
+      N.missions.jingyingbossConfirm.checkClick(captureScreen());
+      sleep(500);
+      N.missions.jingyingbossMenu.checkClick(captureScreen());
+      sleep(500);
+    }
+    N.missions.jingyingbossBack.checkClick(captureScreen());
+    sleep(500);
   },
-  jinzita: function(level) {
-    N.missions.jinzita.checkClick(captureScreen()); sleep(500);
+  jinzita: function (level) {
+    N.missions.jinzita.checkClick(captureScreen());
+    sleep(500);
     if (level < 80) {
-      N.missions.jinzitaNormal.checkClick(captureScreen()); sleep(500);
+      N.missions.jinzitaNormal.checkClick(captureScreen());
+      sleep(500);
     } else if (level < 100) {
-      N.missions.jinzitaHard.checkClick(captureScreen()); sleep(500);
+      N.missions.jinzitaHard.checkClick(captureScreen());
+      sleep(500);
     } else if (level < 140) {
-      N.missions.jinzitaChaos.checkClick(captureScreen()); sleep(500);
+      N.missions.jinzitaChaos.checkClick(captureScreen());
+      sleep(500);
     } else {
-      N.missions.jinzitaHell.checkClick(captureScreen()); sleep(500);
+      N.missions.jinzitaHell.checkClick(captureScreen());
+      sleep(500);
     }
-    N.missions.jinzitaGo.checkClick(captureScreen()); sleep(500);
-    N.missions.jinzitaMenu.checkClick(captureScreen()); sleep(500);
-    N.missions.jinzitaBack.checkClick(captureScreen()); sleep(500);
+    N.missions.jinzitaGo.checkClick(captureScreen());
+    sleep(500);
+    N.missions.jinzitaMenu.checkClick(captureScreen());
+    sleep(500);
+    N.missions.jinzitaBack.checkClick(captureScreen());
+    sleep(500);
   },
-  haidao: function() {
-    N.missions.haidao.checkClick(captureScreen()); sleep(500);
-    N.missions.haidaoGo.checkClick(captureScreen()); sleep(500);
-    N.missions.haidaoConfirm.checkClick(captureScreen()); sleep(500);
-    N.missions.haidaoQuit.checkClick(captureScreen()); sleep(500);
-    N.missions.haidaoMenu.checkClick(captureScreen()); sleep(500);
-    N.missions.haidaoBack.checkClick(captureScreen()); sleep(500);
+  haidao: function () {
+    N.missions.haidao.checkClick(captureScreen());
+    sleep(500);
+    N.missions.haidaoGo.checkClick(captureScreen());
+    sleep(500);
+    N.missions.haidaoConfirm.checkClick(captureScreen());
+    sleep(3500);
+    N.missions.haidaoQuit.checkClick(captureScreen());
+    sleep(500);
+    N.missions.haidaoMenu.checkClick(captureScreen());
+    sleep(500);
+    N.missions.haidaoBack.checkClick(captureScreen());
+    sleep(500);
   },
-  minirenwu: function() {
-    N.missions.minirenwu.checkClick(captureScreen()); sleep(500);
-    N.missions.minirenwu15.checkClick(captureScreen()); sleep(500);
+  minirenwu: function () {
+    N.missions.minirenwu.checkClick(captureScreen());
+    sleep(500);
+    N.missions.minirenwu15.checkClick(captureScreen());
+    sleep(500);
     swipe(155 * 2, 665 * 2, 155 * 2, 202 * 2, 2000);
-    N.missions.minirenwuGo.checkClick(captureScreen()); sleep(500);
-    N.missions.minirenwuConfirm.checkClick(captureScreen()); sleep(500);
-    N.missions.minirenwuAuto.checkClick(captureScreen()); sleep(500);
-    N.missions.minirenwuAutoTimeGet.checkClick(captureScreen()); sleep(500);
-    N.missions.minirenwuAutoStart.checkClick(captureScreen()); sleep(500);
-    N.missions.minirenwuExp.checkClick(captureScreen()); sleep(500);
-    N.missions.minirenwuMenu.checkClick(captureScreen()); sleep(500);
-    N.missions.minirenwuBack.checkClick(captureScreen()); sleep(500);
-  }
+    N.missions.minirenwuGo.checkClick(captureScreen());
+    sleep(500);
+    N.missions.minirenwuConfirm.checkClick(captureScreen());
+    sleep(500);
+    N.missions.minirenwuAuto.checkClick(captureScreen());
+    sleep(500);
+    N.missions.minirenwuAutoTimeGet.checkClick(captureScreen());
+    sleep(500);
+    N.missions.minirenwuAutoStart.checkClick(captureScreen());
+    sleep(500);
+    N.missions.minirenwuExp.checkClick(captureScreen());
+    sleep(500);
+    N.missions.minirenwuMenu.checkClick(captureScreen());
+    sleep(500);
+    N.missions.minirenwuBack.checkClick(captureScreen());
+    sleep(500);
+  },
 };
 
 module.exports = {
@@ -310,5 +378,5 @@ module.exports = {
   clearAds: clearAds,
   goMainline: goMainline,
   buyEquipment: buyEquipment,
-  missions: missions
+  missions: missions,
 };

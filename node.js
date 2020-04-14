@@ -6,6 +6,7 @@ var cYellow = "#ffd741";
 var cCyan = "#59b0a8";
 
 var _clickPoint = function (point) {
+  sleep(500);
   console.log("点击了", point);
   click(point.x * rate, point.y * rate);
 };
@@ -518,7 +519,7 @@ module.exports = {
       [
         _bNode({ x: 507, y: 60 }, "#515f6e"),
         _bNode({ x: 93, y: 162 }, "#515f6e"),
-        _bNode({ x: 516, y: 280 }, "#ff7b50"),
+        _bNode({ x: 516, y: 280 }, "#e5e6e9"),
       ],
       { x: 516, y: 247 },
       true
@@ -586,14 +587,18 @@ module.exports = {
       { x: 350, y: 344 },
       true
     ),
-    jingyingbossOp: _vNode(
-      [
-        _bNode({ x: 673, y: 81 }, "#515f6e"),
-        _bNode({ x: 58, y: 533 }, "#f2f2f2"),
-      ],
-      { x: 807, y: 192 },
-      true
-    ),
+    jingyingbossOp: function(minus) {
+      var x = 1198; var y = 198;
+      var delta = 130;
+      return _vNode(
+        [
+          _bNode({ x: 673, y: 81 }, "#515f6e"),
+          _bNode({ x: 58, y: 533 }, "#f2f2f2"),
+        ],
+        { x: 1198 - delta * minus, y: y },
+        true
+      )
+    },
     jingyingbossHard: _vNode(
       [
         _bNode({ x: 673, y: 81 }, "#515f6e"),
