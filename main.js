@@ -11,8 +11,8 @@ A.prepare();
 
 // A.buyEquipment();
 
-var type = 2; //dialogs.select("脚本类型", ["主线任务", "分解低级装备", "日常任务"]);
-var level = 5; //dialogs.select("角色登记", ["<60", "<80", "<100", "<120", "<140", ">=140"]);
+var type = dialogs.select("脚本类型", ["主线任务", "分解低级装备", "日常任务"]);
+var level = dialogs.select("角色登记", ["<60", "<80", "<100", "<120", "<140", ">=140"]);
 
 switch (level) {
   case 0:
