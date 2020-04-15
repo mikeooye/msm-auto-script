@@ -374,10 +374,28 @@ var missions = {
   },
 };
 
+// 领取樱花奖励
+var getYinghuaBonus = function() {
+  let items = N.huodong.yinghua;
+  console.log(items);
+  
+  let confirm = N.huodong.confirm;
+  for (var index = 0; index < items.length; index++) {
+    var element = items[index];
+    console.log(element);
+    sleep(1000);
+    element.click();
+    sleep(500);
+    confirm.checkClick(captureScreen());
+  }
+  confirm.checkClick(captureScreen());
+}
+
 module.exports = {
   prepare: prepare,
   clearAds: clearAds,
   goMainline: goMainline,
   buyEquipment: buyEquipment,
   missions: missions,
+  getYinghuaBonus: getYinghuaBonus
 };

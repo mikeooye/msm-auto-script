@@ -20,6 +20,10 @@ var _bNode = function (point, color) {
   return new BaseNode(point, color);
 };
 
+BaseNode.prototype.click = function() {
+  _clickPoint(this.point);
+};
+
 BaseNode.prototype.check = function (image) {
   var x = this.point.x * rate;
   var y = this.point.y * rate;
@@ -587,8 +591,9 @@ module.exports = {
       { x: 350, y: 344 },
       true
     ),
-    jingyingbossOp: function(minus) {
-      var x = 1198; var y = 198;
+    jingyingbossOp: function (minus) {
+      var x = 1198;
+      var y = 198;
       var delta = 130;
       return _vNode(
         [
@@ -597,7 +602,7 @@ module.exports = {
         ],
         { x: 1198 - delta * minus, y: y },
         true
-      )
+      );
     },
     jingyingbossHard: _vNode(
       [
@@ -1042,31 +1047,24 @@ module.exports = {
   },
   // 活动 events
   huodong: {
-    menu: _vNode(
+    yinghua: [
+      _bNode({ x: 340, y: 500 }, "#f9f2f2"),
+      _bNode({ x: 558, y: 422 }, "#f9f2f2"),
+      _bNode({ x: 523, y: 587 }, "#f9f2f2"),
+      _bNode({ x: 710, y: 537 }, "#f9f2f2"),
+      _bNode({ x: 893, y: 480 }, "#f9f2f2"),
+      _bNode({ x: 990, y: 608 }, "#f9f2f2"),
+      _bNode({ x: 1056, y: 435 }, "#f9f2f2"),
+      _bNode({ x: 1167, y: 548 }, "#f9f2f2"),
+    ],
+    confirm: _vNode(
       [
-        _bNode({ x: 554, y: 60 }, "#ffffff"),
-        _bNode({ x: 584, y: 721 }, "#ffffff"),
+        _bNode({ x: 565, y: 570 }, "#ff7b50"),
+        _bNode({ x: 734, y: 565 }, "#ff7b50"),
       ],
-      { x: 573, y: 57 },
-      true
+      { x: 636, y: 566 },
+      true,
+      10000
     ),
-    // 挂机奖励
-    guaji: _vNode(
-      [
-        _bNode({ x: 767, y: 76 }, "#515f6e"),
-        _bNode({ x: 198, y: 751 }, "#4e4e4e"),
-      ],
-      { x: 100, y: 437 },
-      true
-    ),
-    // 休息奖励
-    xiuxi: _vNode(
-      [
-        _bNode({ x: 767, y: 76 }, "#515f6e"),
-        _bNode({ x: 198, y: 751 }, "#4e4e4e"),
-      ],
-      { x: 98, y: 532 },
-      true
-    )
   },
 };
