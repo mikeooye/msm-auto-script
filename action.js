@@ -41,7 +41,8 @@ var clearTalkTip = function () {
 
 var goMainline = function () {
   var getNewMission = function () {
-    swipe(145 * 2, 627 * 2, 221 * 2, 624 * 2, 312);
+    swipe(145 * 2, 625 * 2, 221 * 2, 625 * 2, 500);
+    swipe(145 * 2, 625 * 2, 70 * 2, 625 * 2, 400);
     var img = captureScreen();
     N.mainline.menu.checkClick(img);
     sleep(500);
@@ -77,9 +78,9 @@ var goMainline = function () {
   // swipe(145 * 2, 627 * 2, 221 * 2, 624 * 2, 250);
   // return;
 
-  // if (!getNewMission()) {
-  //   return;
-  // }
+  if (!getNewMission()) {
+    return;
+  }
 
   // skipTalk(captureScreen());
 
