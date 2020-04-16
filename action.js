@@ -153,10 +153,10 @@ var buyEquipment = function () {
 
 var missions = {
   prepare: function () {
-    N.missions.menu.checkClick(captureScreen());
-    sleep(500);
-    N.missions.mission.checkClick(captureScreen());
-    sleep(500);
+    N.missions.menu.click();
+    sleep(1500);
+    N.missions.mission.click();
+    sleep(1500);
   },
   meiri: function () {
     var ticket = 3;
@@ -347,36 +347,50 @@ var missions = {
     N.missions.haidaoBack.checkClick(captureScreen());
     sleep(500);
   },
-  minirenwu: function () {
+  minirenwu: function (level) {
     N.missions.minirenwu.checkClick(captureScreen());
     sleep(500);
-    N.missions.minirenwu15.checkClick(captureScreen());
-    sleep(500);
-    swipe(155 * 2, 665 * 2, 155 * 2, 202 * 2, 2000);
-    N.missions.minirenwuGo.checkClick(captureScreen());
-    sleep(500);
-    N.missions.minirenwuConfirm.checkClick(captureScreen());
-    sleep(500);
-    N.missions.minirenwuAuto.checkClick(captureScreen());
-    sleep(500);
-    N.missions.minirenwuAutoTimeGet.checkClick(captureScreen());
-    sleep(500);
-    N.missions.minirenwuAutoStart.checkClick(captureScreen());
-    sleep(500);
-    N.missions.minirenwuExp.checkClick(captureScreen());
-    sleep(500);
-    N.missions.minirenwuMenu.checkClick(captureScreen());
-    sleep(500);
+
+    var delta = 198;
+
+    var minIndex = 2;
+    if (level > 140) {
+      minIndex = -1;
+    }
+    for (var index = 2; index >= minIndex; index--) {
+      N.missions.minirenwu15.checkClick(captureScreen());
+      sleep(500);
+      // 滑动距离选择怪物等级
+      var newDelta = 665 - delta * index;
+      swipe(155 * 2, 665 * 2, 155 * 2, newDelta * 2, 1000);
+      sleep(500);
+
+      N.missions.minirenwuGo.checkClick(captureScreen());
+      sleep(500);
+      N.missions.minirenwuConfirm.checkClick(captureScreen());
+      sleep(500);
+      N.missions.minirenwuAuto.checkClick(captureScreen());
+      sleep(500);
+      N.missions.minirenwuAutoTimeGet.checkClick(captureScreen());
+      sleep(500);
+      N.missions.minirenwuAutoStart.checkClick(captureScreen());
+      sleep(500);
+      N.missions.minirenwuExp.checkClick(captureScreen());
+      sleep(500);
+      N.missions.minirenwuMenu.checkClick(captureScreen());
+      sleep(500);
+    }
+
     N.missions.minirenwuBack.checkClick(captureScreen());
     sleep(500);
   },
 };
 
 // 领取樱花奖励
-var getYinghuaBonus = function() {
+var getYinghuaBonus = function () {
   let items = N.huodong.yinghua;
   console.log(items);
-  
+
   let confirm = N.huodong.confirm;
   for (var index = 0; index < items.length; index++) {
     var element = items[index];

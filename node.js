@@ -378,22 +378,11 @@ module.exports = {
     talkTipClose: _bNode({ x: 1247, y: 184 }, "#ffffff"),
   },
   missions: {
-    menu: _vNode(
-      [
-        _bNode({ x: 1239, y: 21 }, "#ffffff"),
-        _bNode({ x: 1241, y: 34 }, "#ffffff"),
-        _bNode({ x: 1239, y: 48 }, "#ffffff"),
-      ],
-      { x: 1241, y: 34 },
-      true
+    menu: _bNode(
+      { x: 1241, y: 34 }
     ),
-    mission: _vNode(
-      [
-        _bNode({ x: 708, y: 36 }, "#ffffff"),
-        _bNode({ x: 975, y: 56 }, "#ffffff"),
-      ],
-      { x: 1137, y: 45 },
-      true
+    mission: _bNode(
+      { x: 1137, y: 45 }
     ),
     meirirenwu: _vNode(
       [
@@ -1016,10 +1005,10 @@ module.exports = {
     gonghuiGive: _vNode(
       [
         _bNode({ x: 534, y: 66 }, "#515f6e"),
-        _bNode({ x: 144, y: 626 }, "#ff7b50"),
+        _bNode({ x: 1130, y: 567 }, "#ff7b50"),
       ],
       { x: 1060, y: 594 },
-      true
+      true, 10
     ),
     gonghuiBack: _vNode(
       [
