@@ -187,7 +187,7 @@ var missions = {
     sleep(500);
   },
   jinhuaxitong: function (level) {
-    var ticket = 2;
+    var ticket = 3;
     N.missions.jinhuaxitong.checkClick(captureScreen());
     sleep(500);
     // N.missions.jinhuaxitongBonusExpTab.checkClick(captureScreen());
@@ -260,10 +260,8 @@ var missions = {
     N.missions.gonghuirenwuBonus.checkClick(captureScreen());
     sleep(500);
     N.missions.gonghuirenwuBack.checkClick(captureScreen());
-    sleep(500);
-    N.missions.gonghuiSignTab.checkClick(captureScreen());
-    sleep(500);
-    N.missions.gonghuiSign.checkClick(captureScreen());
+    sleep(2500);
+    N.missions.gonghuiSign.click();
     sleep(500);
     N.missions.gonghuiGiveTab.checkClick(captureScreen());
     sleep(500);
@@ -275,7 +273,7 @@ var missions = {
     sleep(500);
   },
   jingyingboss: function (attack) {
-    var ticket = 2;
+    var ticket = 3;
     N.missions.jingyingboss.checkClick(captureScreen());
     sleep(500);
     var opMinus = 0;

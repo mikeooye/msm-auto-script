@@ -20,7 +20,7 @@ var _bNode = function (point, color) {
   return new BaseNode(point, color);
 };
 
-BaseNode.prototype.click = function() {
+BaseNode.prototype.click = function () {
   _clickPoint(this.point);
 };
 
@@ -943,11 +943,10 @@ module.exports = {
     ),
     gonghuirenwu: _vNode(
       [
-        _bNode({ x: 534, y: 66 }, "#515f6e"),
-        _bNode({ x: 479, y: 138 }, "#f2f2f2"),
-        _bNode({ x: 692, y: 342 }, "#ff865c"),
+        _bNode({ x: 720, y: 90 }, "#515f6e"),
+        _bNode({ x: 761, y: 164 }, "#515f6e")
       ],
-      { x: 990, y: 374 },
+      { x: 824, y: 527 },
       true
     ),
     gonghuirenwuGo: _vNode(
@@ -1003,22 +1002,8 @@ module.exports = {
       { x: 44, y: 84 },
       true
     ),
-    gonghuiSignTab: _vNode(
-      [
-        _bNode({ x: 534, y: 66 }, "#515f6e"),
-        _bNode({ x: 479, y: 138 }, "#f2f2f2"),
-        _bNode({ x: 692, y: 342 }, "#ff865c"),
-      ],
-      { x: 108, y: 348 },
-      true
-    ),
-    gonghuiSign: _vNode(
-      [
-        _bNode({ x: 534, y: 66 }, "#515f6e"),
-        _bNode({ x: 136, y: 346 }, "#ff7b50"),
-      ],
-      { x: 1169, y: 702 },
-      true
+    gonghuiSign: _bNode(
+      { x: 1177, y: 284 }, "#"
     ),
     gonghuiGiveTab: _vNode(
       [
