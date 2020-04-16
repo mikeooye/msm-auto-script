@@ -997,9 +997,9 @@ module.exports = {
     gonghuiGiveTab: _vNode(
       [
         _bNode({ x: 534, y: 66 }, "#515f6e"),
-        _bNode({ x: 76, y: 620 }, "#4e4e4e"),
+        _bNode({ x: 76, y: 710 }, "#4e4e4e"),
       ],
-      { x: 76, y: 620 },
+      { x: 76, y: 710 },
       true
     ),
     gonghuiGive: _vNode(
