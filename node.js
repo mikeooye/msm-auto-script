@@ -277,9 +277,8 @@ module.exports = {
   mainline: {
     menu: _vNode(
       [
-        _bNode({ x: 1239, y: 21 }, "#ffffff"),
-        _bNode({ x: 1241, y: 34 }, "#ffffff"),
-        _bNode({ x: 1239, y: 48 }, "#ffffff"),
+        _bNode({ x: 1035, y: 43 }, "#ffffff"),
+        _bNode({ x: 1166, y: 32 }, "#ffffff")
       ],
       { x: 1241, y: 34 },
       true

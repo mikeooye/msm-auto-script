@@ -158,8 +158,8 @@ var missions = {
     N.missions.mission.click();
     sleep(1500);
   },
-  meiri: function () {
-    var ticket = 3;
+  meiri: function (player) {
+    var ticket = player.tickets;
     N.missions.meirirenwu.checkClick(captureScreen());
     sleep(500);
 
@@ -186,8 +186,9 @@ var missions = {
     N.missions.meiriBack.checkClick(captureScreen());
     sleep(500);
   },
-  jinhuaxitong: function (level) {
-    var ticket = 3;
+  jinhuaxitong: function (player) {
+    var ticket = player.tickets;
+    var level = player.level;
     N.missions.jinhuaxitong.checkClick(captureScreen());
     sleep(500);
     // N.missions.jinhuaxitongBonusExpTab.checkClick(captureScreen());
@@ -225,8 +226,8 @@ var missions = {
     N.missions.jinhuaxitongBack.checkClick(captureScreen());
     sleep(500);
   },
-  wulingdaoguan: function () {
-    var ticket = 1;
+  wulingdaoguan: function (player) {
+    var ticket = player.tickets;
     N.missions.wulingdaoguan.checkClick(captureScreen());
     sleep(500);
     N.missions.wulingdaoguanGo.checkClick(captureScreen());
@@ -272,8 +273,9 @@ var missions = {
     missions.prepare();
     sleep(500);
   },
-  jingyingboss: function (attack) {
-    var ticket = 3;
+  jingyingboss: function (player) {
+    var ticket = player.tickets;
+    var attack = player.attack;
     N.missions.jingyingboss.checkClick(captureScreen());
     sleep(500);
     var opMinus = 0;
@@ -310,26 +312,32 @@ var missions = {
     N.missions.jingyingbossBack.checkClick(captureScreen());
     sleep(500);
   },
-  jinzita: function (level) {
+  jinzita: function (player) {
+    var level = player.level;
+    var tickets = player.tickets;
     N.missions.jinzita.checkClick(captureScreen());
-    sleep(500);
-    if (level < 80) {
-      N.missions.jinzitaNormal.checkClick(captureScreen());
+
+    for (var cost = 0; cost < tickets; cost++) {
       sleep(500);
-    } else if (level < 100) {
-      N.missions.jinzitaHard.checkClick(captureScreen());
+      if (level < 80) {
+        N.missions.jinzitaNormal.checkClick(captureScreen());
+        sleep(500);
+      } else if (level < 100) {
+        N.missions.jinzitaHard.checkClick(captureScreen());
+        sleep(500);
+      } else if (level < 140) {
+        N.missions.jinzitaChaos.checkClick(captureScreen());
+        sleep(500);
+      } else {
+        N.missions.jinzitaHell.checkClick(captureScreen());
+        sleep(500);
+      }
+      N.missions.jinzitaGo.checkClick(captureScreen());
       sleep(500);
-    } else if (level < 140) {
-      N.missions.jinzitaChaos.checkClick(captureScreen());
-      sleep(500);
-    } else {
-      N.missions.jinzitaHell.checkClick(captureScreen());
+      N.missions.jinzitaMenu.checkClick(captureScreen());
       sleep(500);
     }
-    N.missions.jinzitaGo.checkClick(captureScreen());
-    sleep(500);
-    N.missions.jinzitaMenu.checkClick(captureScreen());
-    sleep(500);
+
     N.missions.jinzitaBack.checkClick(captureScreen());
     sleep(500);
   },
@@ -347,19 +355,29 @@ var missions = {
     N.missions.haidaoBack.checkClick(captureScreen());
     sleep(500);
   },
-  minirenwu: function (level) {
+  minirenwu: function (player) {
+    var level = player.level;
+    var tickets = player.tickets;
+    if (tickets > 4) {
+      // 最多4次
+      tickets = 4;
+    }
     N.missions.minirenwu.checkClick(captureScreen());
     sleep(500);
 
     var delta = 198;
 
-    var minIndex = 2;
-    if (level > 140) {
-      minIndex = -1;
-    }
-    for (var index = 2; index >= minIndex; index--) {
+    // player < 140, 全部都是 0
+    // player > 140 0:-1, 1:0, 2:1, 3:2 4:2
+    for (var cost = 0; cost < tickets; cost++) {
       N.missions.minirenwu15.checkClick(captureScreen());
       sleep(500);
+
+      var index = cost;
+      // index = 0, 当前同级怪物； index = 1，越2级怪物；index = 2，越4级怪物；index = -1，低2级怪物
+      if (index === 3) {
+        index = -1;
+      }
       // 滑动距离选择怪物等级
       var newDelta = 665 - delta * index;
       swipe(155 * 2, 665 * 2, 155 * 2, newDelta * 2, 1000);
@@ -401,7 +419,7 @@ var getYinghuaBonus = function () {
     confirm.checkClick(captureScreen());
   }
   confirm.checkClick(captureScreen());
-}
+};
 
 module.exports = {
   prepare: prepare,
@@ -409,5 +427,5 @@ module.exports = {
   goMainline: goMainline,
   buyEquipment: buyEquipment,
   missions: missions,
-  getYinghuaBonus: getYinghuaBonus
+  getYinghuaBonus: getYinghuaBonus,
 };
