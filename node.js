@@ -936,7 +936,7 @@ module.exports = {
         _bNode({ x: 761, y: 164 }, "#515f6e")
       ],
       { x: 824, y: 527 },
-      true
+      true, 5000
     ),
     gonghuirenwuGo: _vNode(
       [
@@ -945,7 +945,7 @@ module.exports = {
         _bNode({ x: 568, y: 704 }, "#ff7b50"),
       ],
       { x: 523, y: 704 },
-      true
+      true, 5000
     ),
     gonghuirenwuBonus: _vNode(
       [
@@ -954,7 +954,7 @@ module.exports = {
         _bNode({ x: 1202, y: 715 }, "#ff7b50"),
       ],
       { x: 1202, y: 715 },
-      true
+      true, 5000
     ),
     gonghuirenwuExit: _vNode(
       [
@@ -963,7 +963,7 @@ module.exports = {
         _bNode({ x: 885, y: 600 }, "#ff7b50"),
       ],
       { x: 503, y: 600 },
-      true
+      true, 5000
     ),
     gonghuirenwuMenu: _vNode(
       [
@@ -972,7 +972,7 @@ module.exports = {
         _bNode({ x: 885, y: 600 }, "#ff7b50"),
       ],
       { x: 704, y: 600 },
-      true
+      true, 5000
     ),
     gonghuirenwuContinue: _vNode(
       [
@@ -981,7 +981,7 @@ module.exports = {
         _bNode({ x: 885, y: 600 }, "#ff7b50"),
       ],
       { x: 885, y: 600 },
-      true
+      true, 5000
     ),
     gonghuirenwuBack: _vNode(
       [
@@ -989,7 +989,7 @@ module.exports = {
         _bNode({ x: 168, y: 292 }, "#f2f2f2"),
       ],
       { x: 44, y: 84 },
-      true
+      true, 5000
     ),
     gonghuiSign: _bNode(
       { x: 1177, y: 284 }, "#"
@@ -1000,7 +1000,7 @@ module.exports = {
         _bNode({ x: 76, y: 710 }, "#4e4e4e"),
       ],
       { x: 76, y: 710 },
-      true
+      true, 5000
     ),
     gonghuiGive: _vNode(
       [
@@ -1008,7 +1008,7 @@ module.exports = {
         _bNode({ x: 1130, y: 567 }, "#ff7b50"),
       ],
       { x: 1060, y: 594 },
-      true, 10
+      true, 10, 5000
     ),
     gonghuiBack: _vNode(
       [
@@ -1016,7 +1016,7 @@ module.exports = {
         _bNode({ x: 887, y: 78 }, "#515f6e"),
       ],
       { x: 1244, y: 80 },
-      true
+      true, 5000
     ),
   },
   // 活动 events
