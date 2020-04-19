@@ -102,7 +102,7 @@ ViewNode.prototype.checkClick = function (image) {
 
       if (this.timeout > 0 && new Date().getTime() - beginTime > this.timeout) {
         console.log("检测窗口超时", this.timeout);
-        return true;
+        return false;
       }
 
       console.log("等待出现窗口");
@@ -210,8 +210,8 @@ module.exports = {
     ),
     // 武器栏
     cartEquipmentTab: _vNode(
-      [_bNode({ x: 127, y: 350 }, "#4e4e4e")],
-      { x: 127, y: 350 },
+      [_bNode({ x: 127, y: 529 }, "#4e4e4e")],
+      { x: 127, y: 529 },
       true
     ),
     // 飞侠武器
@@ -932,10 +932,10 @@ module.exports = {
     gonghuirenwu: _vNode(
       [
         _bNode({ x: 720, y: 90 }, "#515f6e"),
-        _bNode({ x: 761, y: 164 }, "#515f6e")
+        _bNode({x: 687, y: 489}, "#fc784f")
       ],
       { x: 824, y: 527 },
-      true, 5000
+      true, 10000
     ),
     gonghuirenwuGo: _vNode(
       [
@@ -944,7 +944,7 @@ module.exports = {
         _bNode({ x: 568, y: 704 }, "#ff7b50"),
       ],
       { x: 523, y: 704 },
-      true, 5000
+      true, 10000
     ),
     gonghuirenwuBonus: _vNode(
       [
@@ -952,8 +952,7 @@ module.exports = {
         _bNode({ x: 168, y: 292 }, "#f2f2f2"),
         _bNode({ x: 1202, y: 715 }, "#ff7b50"),
       ],
-      { x: 1202, y: 715 },
-      true, 5000
+      { x: 1202, y: 715 }
     ),
     gonghuirenwuExit: _vNode(
       [
@@ -961,8 +960,7 @@ module.exports = {
         _bNode({ x: 704, y: 600 }, "#59b0a8"),
         _bNode({ x: 885, y: 600 }, "#ff7b50"),
       ],
-      { x: 503, y: 600 },
-      true, 5000
+      { x: 503, y: 600 }
     ),
     gonghuirenwuMenu: _vNode(
       [
@@ -970,8 +968,7 @@ module.exports = {
         _bNode({ x: 704, y: 600 }, "#59b0a8"),
         _bNode({ x: 885, y: 600 }, "#ff7b50"),
       ],
-      { x: 704, y: 600 },
-      true, 5000
+      { x: 704, y: 600 }
     ),
     gonghuirenwuContinue: _vNode(
       [
@@ -979,16 +976,14 @@ module.exports = {
         _bNode({ x: 704, y: 600 }, "#59b0a8"),
         _bNode({ x: 885, y: 600 }, "#ff7b50"),
       ],
-      { x: 885, y: 600 },
-      true, 5000
+      { x: 885, y: 600 }
     ),
     gonghuirenwuBack: _vNode(
       [
         _bNode({ x: 581, y: 85 }, "#515f6e"),
         _bNode({ x: 168, y: 292 }, "#f2f2f2"),
       ],
-      { x: 44, y: 84 },
-      true, 5000
+      { x: 44, y: 84 }
     ),
     gonghuiSign: _bNode(
       { x: 1177, y: 284 }, "#"

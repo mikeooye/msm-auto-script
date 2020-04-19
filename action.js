@@ -111,7 +111,7 @@ var goMainline = function () {
 };
 
 var buyEquipment = function () {
-  var count = 20;
+  var count = 60;
   N.carts.menu.checkClick(captureScreen());
   sleep(500);
   N.carts.cart.checkClick(captureScreen());
@@ -139,13 +139,38 @@ var buyEquipment = function () {
   N.carts.bag.checkClick(captureScreen());
   sleep(500);
 
-  for (i = 0; i < count; i++) {
-    N.carts.bagItem(i).checkClick(captureScreen());
+  fenjie(count, 0);
+};
+
+var fenjie = function (times, offset) {
+
+  var swipeNext20 = function () {
+    swipe(876 * 2, 644 * 2, 876 * 2, 420 * 2, 800);
+    sleep(700);
+    swipe(876 * 2, 600 * 2, 876 * 2, 340 * 2, 800);
+  };
+  for (i = offset; i < times; i++) {
+
+    var itemIndex = i % 20;
+    sleep(200);
+
+    if (i > 0 && itemIndex === 0) {
+      sleep(500);
+      swipeNext20();
+    }
+
+
+    N.carts.bagItem(itemIndex).checkClick(captureScreen());
     sleep(500);
     N.carts.bagItemJianding.checkClick(captureScreen());
     sleep(500);
     N.carts.bagItemJiandingConfirm.checkClick(captureScreen());
-    sleep(500);
+    sleep(1000);
+    if (images.detectsColor(captureScreen(), "#ffffff", 953 * 2, 635 * 2, 1)) {
+      console.log('2 ge', i);
+    } else {
+      console.log('3 ge', i);
+    }
     N.carts.bagItemClose.checkClick(captureScreen());
     sleep(500);
   }
@@ -250,18 +275,21 @@ var missions = {
   gonghui: function () {
     N.missions.gonghui.checkClick(captureScreen());
     sleep(500);
-    N.missions.gonghuirenwu.checkClick(captureScreen());
-    sleep(500);
-    N.missions.gonghuirenwuGo.checkClick(captureScreen());
-    sleep(500);
-    N.missions.gonghuirenwuContinue.checkClick(captureScreen());
-    sleep(500);
-    N.missions.gonghuirenwuMenu.checkClick(captureScreen());
-    sleep(500);
-    N.missions.gonghuirenwuBonus.checkClick(captureScreen());
-    sleep(500);
-    N.missions.gonghuirenwuBack.checkClick(captureScreen());
-    sleep(2500);
+    if (N.missions.gonghuirenwu.checkClick(captureScreen())) {
+      sleep(500);
+      if (N.missions.gonghuirenwuGo.checkClick(captureScreen())) {
+        sleep(500);
+        N.missions.gonghuirenwuContinue.checkClick(captureScreen());
+        sleep(500);
+        N.missions.gonghuirenwuMenu.checkClick(captureScreen());
+        sleep(500);
+      }
+      N.missions.gonghuirenwuBonus.checkClick(captureScreen());
+      sleep(500);
+      N.missions.gonghuirenwuBack.checkClick(captureScreen());
+      sleep(2500);
+    }
+
     N.missions.gonghuiSign.click();
     sleep(500);
     N.missions.gonghuiGiveTab.checkClick(captureScreen());
@@ -428,4 +456,5 @@ module.exports = {
   buyEquipment: buyEquipment,
   missions: missions,
   getYinghuaBonus: getYinghuaBonus,
+  fenjie: fenjie
 };
