@@ -8,6 +8,7 @@ var Elite = require("./src/target/elite");
 var Wuling = require("./src/target/wuling");
 var ifufo = require("./src/player/ifufo");
 var Evolution = require("./src/target/evolution");
+var Guild = require("./src/target/guild");
 
 // var width = 1024;
 // var height = 640;
@@ -23,7 +24,8 @@ A.prepare();
 // DailyDungeon.exec();
 // Elite.exec(ifufo);
 // Wuling.exec(ifufo);
-Evolution.exec(ifufo);
+// Evolution.exec(ifufo);
+Guild.exec(ifufo);
 
 // var type = C.getType();
 
