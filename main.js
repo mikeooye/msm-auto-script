@@ -4,6 +4,10 @@ var Root = require("./src/target/root");
 var MissionMenu = require("./src/target/missionMenu");
 var QuickDungeon = require("./src/target/quickDungeon");
 var DailyDungeon = require("./src/target/dailyDungeon");
+var Elite = require("./src/target/elite");
+var Wuling = require("./src/target/wuling");
+var ifufo = require("./src/player/ifufo");
+var Evolution = require("./src/target/evolution");
 
 // var width = 1024;
 // var height = 640;
@@ -12,11 +16,14 @@ var DailyDungeon = require("./src/target/dailyDungeon");
 
 A.prepare();
 
-Root.missionMenu.checkClick();
-MissionMenu.quickDungeon.checkClick();
-QuickDungeon.daily.checkClick();
+// Root.missionMenu.checkClick();
+// MissionMenu.quickDungeon.checkClick();
+// QuickDungeon.daily.checkClick();
 
-DailyDungeon.exec();
+// DailyDungeon.exec();
+// Elite.exec(ifufo);
+// Wuling.exec(ifufo);
+Evolution.exec(ifufo);
 
 // var type = C.getType();
 
