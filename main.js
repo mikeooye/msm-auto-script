@@ -32,8 +32,11 @@ Dungeon.daily.exec(ifufo);
 // Dungeon.mini.exec();
 Dungeon.quick.elite.checkClick();
 Dungeon.elite.exec(ifufo);
-Dungeon.quick.guild.checkClick();
-Dungeon.guild.exec(ifufo);
+if (ifufo.hasGuild) {
+  Dungeon.quick.guild.checkClick();
+  Dungeon.guild.exec(ifufo);
+}
+
 Dungeon.quick.wuling.checkClick();
 Dungeon.wuling.exec(ifufo);
 Dungeon.quick.evolution.checkClick();
