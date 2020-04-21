@@ -1,5 +1,5 @@
-var Node = require("../node/node");
-var Color = require("../color");
+var Node = require("../../node/node");
+var Color = require("../../color");
 
 var identifier = [
   // 窗口蓝灰色标题栏
@@ -8,15 +8,9 @@ var identifier = [
   new Node.BaseNode(755, 702, Color.blue),
 ];
 
-var confirmIdentifier = [
-  new Node.BaseNode(521, 515, "#7f7f7f"),
-  new Node.BaseNode(532, 680, Color.blue),
-];
+var confirmIdentifier = [new Node.BaseNode(521, 515, "#7f7f7f"), new Node.BaseNode(532, 680, Color.blue)];
 
-var settleIdentifier = [
-  new Node.BaseNode(727, 168, "#FFFFDE"),
-  new Node.BaseNode(494, 677, Color.blue),
-];
+var settleIdentifier = [new Node.BaseNode(727, 168, "#FFFFDE"), new Node.BaseNode(494, 677, Color.blue)];
 
 module.exports = {
   // 主窗口
@@ -29,13 +23,7 @@ module.exports = {
   confirmWindow: new Node.ViewNode(confirmIdentifier, 0, 0, true, 10000),
   // 确认按钮
   confirm: new Node.BaseNode(791, 686),
-  cancel: new Node.ViewNode(
-    [new Node.BaseNode(785, 184, "#3d3d3d")].concat(confirmIdentifier),
-    477,
-    684,
-    true,
-    5000
-  ),
+  cancel: new Node.ViewNode([new Node.BaseNode(785, 184, "#3d3d3d")].concat(confirmIdentifier), 477, 684, true, 5000),
   // 结算窗口
   settlementWindow: new Node.ViewNode(settleIdentifier, 0, 0, true),
   // 结算窗口返回到主窗口

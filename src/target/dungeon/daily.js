@@ -1,5 +1,5 @@
-var Node = require("../node/node");
-var Color = require("../color");
+var Node = require("../../node/node");
+var Color = require("../../color");
 
 var identifiers = [
   // 标题栏蓝灰色
@@ -18,21 +18,11 @@ var goIdentifiers = [
   new Node.BaseNode(872, 569, Color.orange),
 ];
 
-var continueIdentifiers = [
-  new Node.BaseNode(499, 542, Color.blue),
-  new Node.BaseNode(706, 543, Color.cyan),
-  new Node.BaseNode(892, 534, Color.orange),
-];
+var continueIdentifiers = [new Node.BaseNode(499, 542, Color.blue), new Node.BaseNode(706, 543, Color.cyan), new Node.BaseNode(892, 534, Color.orange)];
 
 module.exports = {
   // 进入按钮，如果按钮颜色不正确，表示没有门票不可进入，此时应该返回到上级菜单
-  go: new Node.ViewNode(
-    identifiers.concat([new Node.BaseNode(1198, 686, Color.orange)]),
-    1131,
-    706,
-    true,
-    5000
-  ),
+  go: new Node.ViewNode(identifiers.concat([new Node.BaseNode(1198, 686, Color.orange)]), 1131, 706, true, 5000),
   // 返回按钮
   back: new Node.ViewNode(identifiers, 38, 86, true, 5000),
   // 退出按钮

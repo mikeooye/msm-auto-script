@@ -2,13 +2,9 @@ var A = require("./action");
 var C = require("./config");
 var Root = require("./src/target/root");
 var MissionMenu = require("./src/target/missionMenu");
-var QuickDungeon = require("./src/target/quickDungeon");
-var DailyDungeon = require("./src/target/dailyDungeon");
-var Elite = require("./src/target/elite");
-var Wuling = require("./src/target/wuling");
+var QuickDungeon = require("./src/target/dungeon/quick");
 var ifufo = require("./src/player/ifufo");
-var Evolution = require("./src/target/evolution");
-var Guild = require("./src/target/guild");
+var Dungeon = require("./src/target/dungeon/index");
 
 // var width = 1024;
 // var height = 640;
@@ -17,15 +13,31 @@ var Guild = require("./src/target/guild");
 
 A.prepare();
 
-// Root.missionMenu.checkClick();
-// MissionMenu.quickDungeon.checkClick();
+Root.missionMenu.checkClick();
+MissionMenu.quickDungeon.checkClick();
 // QuickDungeon.daily.checkClick();
 
 // DailyDungeon.exec();
 // Elite.exec(ifufo);
 // Wuling.exec(ifufo);
 // Evolution.exec(ifufo);
-Guild.exec(ifufo);
+// Guild.exec(ifufo);
+
+// Dungeon.quick.daily.checkClick();
+// Dungeon.daily.exec();
+
+// Dungeon.quick.mini.checkClick();
+Dungeon.quick.daily.checkClick();
+Dungeon.daily.exec(ifufo);
+// Dungeon.mini.exec();
+Dungeon.quick.elite.checkClick();
+Dungeon.elite.exec(ifufo);
+Dungeon.quick.guild.checkClick();
+Dungeon.guild.exec(ifufo);
+Dungeon.quick.wuling.checkClick();
+Dungeon.wuling.exec(ifufo);
+Dungeon.quick.evolution.checkClick();
+Dungeon.evolution.exec(ifufo);
 
 // var type = C.getType();
 

@@ -1,7 +1,7 @@
-var Node = require("../node/node");
-var Color = require("../color");
-var Root = require("./root");
-var MissionMenu = require("./missionMenu");
+var Node = require("../../node/node");
+var Color = require("../../color");
+var Root = require("../root");
+var MissionMenu = require("../missionMenu");
 
 var identifier = [
   // 窗口蓝灰色标题栏
@@ -10,20 +10,11 @@ var identifier = [
   new Node.BaseNode(366, 358, "#d3d6d9"),
 ];
 
-var dungeonIdentifier = [
-  new Node.BaseNode(400, 82, Color.blueGrey),
-  new Node.BaseNode(923, 712, Color.blue),
-];
+var dungeonIdentifier = [new Node.BaseNode(400, 82, Color.blueGrey), new Node.BaseNode(923, 712, Color.blue)];
 
-var settleId = [
-  new Node.BaseNode(486, 605, Color.blue),
-  new Node.BaseNode(772, 608, Color.orange),
-];
+var settleId = [new Node.BaseNode(486, 605, Color.blue), new Node.BaseNode(772, 608, Color.orange)];
 
-var giveIdentifier = [
-  new Node.BaseNode(131, 75, Color.blueGrey),
-  new Node.BaseNode(947, 566, Color.orange),
-];
+var giveIdentifier = [new Node.BaseNode(131, 75, Color.blueGrey), new Node.BaseNode(947, 566, Color.orange)];
 
 module.exports = {
   // 主窗口
@@ -35,13 +26,7 @@ module.exports = {
   dungeon: new Node.BaseNode(798, 532),
   dungeonWindow: new Node.ViewNode(dungeonIdentifier, 0, 0, true, 5000),
   dungeonBonus: new Node.BaseNode(1181, 712),
-  dungeonGo: new Node.ViewNode(
-    dungeonIdentifier.concat([new Node.BaseNode(559, 699, Color.orange)]),
-    519,
-    703,
-    true,
-    5000
-  ),
+  dungeonGo: new Node.ViewNode(dungeonIdentifier.concat([new Node.BaseNode(559, 699, Color.orange)]), 519, 703, true, 5000),
   give: new Node.BaseNode(1178, 698),
   // 结算窗口
   settlementWindow: new Node.ViewNode(settleId, 0, 0, true),

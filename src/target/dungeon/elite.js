@@ -1,5 +1,5 @@
-var Node = require("../node/node");
-var Color = require("../color");
+var Node = require("../../node/node");
+var Color = require("../../color");
 
 var identifier = [
   // 窗口蓝灰色标题栏
@@ -8,15 +8,9 @@ var identifier = [
   new Node.BaseNode(755, 702, Color.blue),
 ];
 
-var homeIdentifier = [
-  new Node.BaseNode(199, 209, Color.orange),
-  new Node.BaseNode(124, 269, "#59b0a8"),
-];
+var homeIdentifier = [new Node.BaseNode(199, 209, Color.orange), new Node.BaseNode(124, 269, "#59b0a8")];
 
-var settleIdentifier = [
-  new Node.BaseNode(562, 485, Color.orange),
-  new Node.BaseNode(497, 621, Color.blue),
-];
+var settleIdentifier = [new Node.BaseNode(562, 485, Color.orange), new Node.BaseNode(497, 621, Color.blue)];
 
 module.exports = {
   // 主窗口

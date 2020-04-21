@@ -1,5 +1,5 @@
-var Node = require("../node/node");
-var Color = require("../color");
+var Node = require("../../node/node");
+var Color = require("../../color");
 
 var identifier = [
   // 窗口蓝灰色标题栏

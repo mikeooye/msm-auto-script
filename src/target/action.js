@@ -7,6 +7,8 @@ module.exports = {
     sleep(500);
   },
   swipe: function (startX, startY, endX, endY, duration) {
+    sleep(300);
     swipe(startX * rate, startY * rate, endX * rate, endY * rate, duration);
+    sleep(500);
   },
 };
