@@ -4,6 +4,8 @@ var Root = require("./src/target/root");
 var MissionMenu = require("./src/target/missionMenu");
 var QuickDungeon = require("./src/target/dungeon/quick");
 var ifufo = require("./src/player/ifufo");
+var calbeec = require("./src/player/calbeec");
+var Mamair = require("./src/player/Mamair");
 var Dungeon = require("./src/target/dungeon/index");
 
 // var width = 1024;
@@ -13,34 +15,28 @@ var Dungeon = require("./src/target/dungeon/index");
 
 A.prepare();
 
-Root.missionMenu.checkClick();
-MissionMenu.quickDungeon.checkClick();
-// QuickDungeon.daily.checkClick();
+var players = [ifufo, calbeec, Mamair];
+var playerNames = ["ifufo", "calbeec", "Mamair"];
+var _player = players[dialogs.select("玩家", playerNames)];
 
-// DailyDungeon.exec();
-// Elite.exec(ifufo);
-// Wuling.exec(ifufo);
-// Evolution.exec(ifufo);
-// Guild.exec(ifufo);
+// Root.missionMenu.checkClick();
+// MissionMenu.quickDungeon.checkClick();
 
 // Dungeon.quick.daily.checkClick();
-// Dungeon.daily.exec();
-
-// Dungeon.quick.mini.checkClick();
-Dungeon.quick.daily.checkClick();
-Dungeon.daily.exec(ifufo);
-// Dungeon.mini.exec();
+// Dungeon.daily.exec(_player);
+Dungeon.quick.mini.checkClick();
+Dungeon.mini.exec(_player);
 Dungeon.quick.elite.checkClick();
-Dungeon.elite.exec(ifufo);
-if (ifufo.hasGuild) {
+Dungeon.elite.exec(_player);
+if (_player.hasGuild) {
   Dungeon.quick.guild.checkClick();
-  Dungeon.guild.exec(ifufo);
+  Dungeon.guild.exec(_player);
 }
 
 Dungeon.quick.wuling.checkClick();
-Dungeon.wuling.exec(ifufo);
+Dungeon.wuling.exec(_player);
 Dungeon.quick.evolution.checkClick();
-Dungeon.evolution.exec(ifufo);
+Dungeon.evolution.exec(_player);
 
 // var type = C.getType();
 

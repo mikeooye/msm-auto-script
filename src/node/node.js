@@ -32,14 +32,7 @@ var BaseNode = function (x, y, color) {
 
     for (var i = 0; i < _color.length; i++) {
       var aColor = _color[i];
-      if (
-        !images.detectsColor(
-          _image,
-          aColor,
-          this.point.x * rate,
-          this.point.y * rate
-        )
-      ) {
+      if (!images.detectsColor(_image, aColor, this.point.x * rate, this.point.y * rate)) {
         // 未检测到颜色
         if (DEBUG) {
           var realColor = images.pixel(_image, this.point.x, this.point.y);
@@ -88,6 +81,7 @@ var ViewNode = function (identifies, x, y, isWait, timeout) {
     var beginTime = new Date().getTime();
     while (1) {
       if (this.check(_image)) {
+        console.log("检测到窗口");
         return true;
       }
 
