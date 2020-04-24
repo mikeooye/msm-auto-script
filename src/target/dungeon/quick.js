@@ -25,4 +25,8 @@ module.exports = {
   pirate: new Node.ViewNode(identifier, 1013, 331, true, 5000),
   // 进化系统
   evolution: new Node.ViewNode(identifier, 1195, 621, true, 5000),
+  // x 按钮
+  close: new Node.ViewNode(identifier, 1240, 81),
+  // 空白地方
+  closeAgin: new Node.BaseNode(1266, 127),
 };
