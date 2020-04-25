@@ -1,3 +1,5 @@
+var Action = require("../target/action");
+
 /**
  * 玩家
  *
@@ -25,6 +27,14 @@ var Player = function (name, role, level, attack, hasGuild) {
    * 是否有公会
    */
   this.hasGuild = hasGuild;
+
+  this.walkLeft = function (duration) {
+    Action.swipe(147, 625, 75, 625, duration);
+  };
+
+  this.walkRight = function (duration) {
+    Action.swipe(147, 625, 219, 625, duration);
+  };
 };
 
 module.exports = Player;
