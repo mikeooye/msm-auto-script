@@ -5,6 +5,8 @@ var elite = require("./elite");
 var guild = require("./guild");
 var wuling = require("./wuling");
 var evolution = require("./evolution");
+var pyramid = require("./pyramid");
+var pirate = require("./pirate");
 
 module.exports = {
   quick: quick,
@@ -14,4 +16,6 @@ module.exports = {
   guild: guild,
   wuling: wuling,
   evolution: evolution,
+  pyramid: pyramid,
+  pirate: pirate,
 };

@@ -5,6 +5,7 @@ module.exports = {
   // var cCyan = "#59b0a8";
 
   white: "#ffffff",
+  lightWhite: "#f2f2f2",
   orange: "#ff7b50",
   yellow: "#ffd741",
   cyan: "#59b0a8",
