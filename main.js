@@ -15,9 +15,18 @@ A.prepare();
 
 // Mainline.exec(ifufo);
 
-Account.changePlayer(Mamair);
+// Account.changePlayer(Mamair);
 
-let players = Account.google;
+let titles = ["Apple 账号", "ifufo"];
+let selection = dialogs.select("选择账号方式", titles);
+let players = [];
+if (selection == 0) {
+  players = Account.apple;
+} else {
+  players = Account.google;
+}
+
+// let players = Account.google;
 for (var i = 0; i < players.length; i++) {
   var _player = players[i];
 
@@ -36,5 +45,19 @@ for (var i = 0; i < players.length; i++) {
   if (_player.hasGuild) {
     Dungeon.quick.guild.checkClick();
     Dungeon.guild.exec(_player);
+  }
+  Dungeon.quick.wuling.checkClick();
+  Dungeon.wuling.exec(_player);
+  Dungeon.quick.evolution.checkClick();
+  Dungeon.evolution.exec(_player);
+
+  sleep(5000);
+  Dungeon.quick.close.click();
+  sleep(2000);
+  Dungeon.quick.closeAgin.click();
+
+  if (i + 1 < players.length) {
+    var nextPlayer = players[i + 1];
+    Account.changePlayer(nextPlayer);
   }
 }
