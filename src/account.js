@@ -4,7 +4,7 @@ var Root = require("./target/root");
 var Player = require("./player/index");
 
 var Account = {
-  apple: [Player.ifufo],
+  google: [Player.ifufo],
   apple: [Player.calbeec, Player.Mamair],
   node: {
     channelWindow: new Node.ViewNode([new Node.BaseNode(706, 688, Color.orange), new Node.BaseNode(900, 89, Color.blueGrey)], 0, 0, true),

@@ -17,7 +17,7 @@ A.prepare();
 
 // Account.changePlayer(Mamair);
 
-let titles = ["Apple 账号", "ifufo"];
+let titles = ["Apple 账号", "leehaozhen@gmail 账号"];
 let selection = dialogs.select("选择账号方式", titles);
 let players = [];
 if (selection == 0) {
