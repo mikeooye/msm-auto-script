@@ -21,7 +21,15 @@ let titles = ["Apple 账号", "ifufo"];
 let selection = dialogs.select("选择账号方式", titles);
 let players = [];
 if (selection == 0) {
-  players = Account.apple;
+  titles = ["全部", "calbeec", "Mamair"];
+  selection = dialogs.select("请选择", titles);
+  if (selection === 0) {
+    players = Account.apple;
+  } else if (selection === 1) {
+    players = [calbeec];
+  } else {
+    players = [Mamair];
+  }
 } else {
   players = Account.google;
 }
