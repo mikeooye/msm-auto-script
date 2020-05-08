@@ -2,6 +2,8 @@ var Color = require("../../color");
 var Node = require("../../node/node");
 var Action = require("../action");
 
+// mini 副本
+
 var identifiers = [new Node.BaseNode(229, 77, Color.blueGrey), new Node.BaseNode(934, 392, Color.yellow)];
 var expId = [new Node.BaseNode(853, 213, Color.blueGrey), new Node.BaseNode(568, 423, "#d7d7d6"), new Node.BaseNode(677, 570, Color.orange)];
 
@@ -44,12 +46,13 @@ module.exports = {
   continueWindow: new Node.ViewNode([new Node.BaseNode(515, 192, Color.orange), new Node.BaseNode(474, 676, Color.blue), new Node.BaseNode(718, 682, Color.teal)], 0, 0, true),
   // 继续窗口中的继续
   continueMenu: new Node.BaseNode(718, 682, Color.teal),
-  exec: function (player) {
+  exec: function (player, times) {
+    var _times = times || 100;
     var level = 0;
     if (player.level >= 140) {
       level = 2;
     }
-    while (1) {
+    while (_times) {
       this.main.wait();
       if (!this.option15.checkClick()) {
         break;
@@ -82,6 +85,7 @@ module.exports = {
           break;
         }
       }
+      _times -= 1;
     }
     sleep(3000);
     this.back.click();

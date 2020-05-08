@@ -47,8 +47,9 @@ module.exports = {
   // 结算窗口返回到主窗口
   backToMainWindow: new Node.BaseNode(645, 629),
 
-  exec: function (player) {
-    while (1) {
+  exec: function (player, times) {
+    var _times = times || 100;
+    while (_times) {
       if (!this.mainWindow.wait()) {
         break;
       }
@@ -66,6 +67,8 @@ module.exports = {
 
       this.settlementWindow.wait();
       this.backToMainWindow.click();
+
+      _times -= 1;
     }
 
     this.back.click();

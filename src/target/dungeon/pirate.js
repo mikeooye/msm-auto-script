@@ -26,8 +26,9 @@ module.exports = {
   exit: new Node.BaseNode(1239, 293),
   backToMainWindow: new Node.BaseNode(641, 573),
 
-  exec: function (player) {
-    while (1) {
+  exec: function (player, times) {
+    var _times = times || 100;
+    while (_times) {
       if (!this.mainWindow.wait()) {
         break;
       }
@@ -48,6 +49,8 @@ module.exports = {
       sleep(1000);
       this.backToMainWindow.click();
       sleep(1000);
+
+      _times -= 1;
     }
 
     this.back.click();

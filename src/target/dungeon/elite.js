@@ -1,6 +1,7 @@
 var Node = require("../../node/node");
 var Color = require("../../color");
 
+// 精英副本
 var identifier = [
   // 窗口蓝灰色标题栏
   new Node.BaseNode(409, 83, Color.blueGrey),
@@ -30,8 +31,9 @@ module.exports = {
   // 结算窗口返回到主窗口
   backToMainWindow: new Node.BaseNode(634, 622),
 
-  exec: function (player) {
-    while (1) {
+  exec: function (player, times) {
+    var _times = times || 100;
+    while (_times) {
       if (!this.mainWindow.wait()) {
         break;
       }
@@ -50,6 +52,7 @@ module.exports = {
 
       this.settlementWindow.wait();
       this.backToMainWindow.click();
+      _times -= 1;
     }
 
     this.back.click();

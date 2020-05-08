@@ -3,6 +3,7 @@ var Color = require("../../color");
 var Root = require("../root");
 var MissionMenu = require("../missionMenu");
 
+// 公会
 var identifier = [
   // 窗口蓝灰色标题栏
   new Node.BaseNode(97, 79, Color.blueGrey),
