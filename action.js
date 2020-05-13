@@ -1,5 +1,3 @@
-var N = require("./node");
-
 var prepare = function () {
   auto();
   if (!requestScreenCapture()) {
@@ -10,5 +8,5 @@ var prepare = function () {
 };
 
 module.exports = {
-  prepare: prepare
+  prepare: prepare,
 };

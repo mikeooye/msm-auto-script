@@ -17,47 +17,48 @@ A.prepare();
 
 // Account.changePlayer(Mamair);
 
-let titles = ["Apple 账号", "leehaozhen@gmail 账号"];
-let selection = dialogs.select("选择账号方式", titles);
-let players = [];
-if (selection == 0) {
-  titles = ["全部", "calbeec", "Mamair"];
-  selection = dialogs.select("请选择", titles);
-  if (selection === 0) {
-    players = Account.apple;
-  } else if (selection === 1) {
-    players = [calbeec];
-  } else {
-    players = [Mamair];
-  }
-} else {
-  players = Account.google;
-}
+// let titles = ["Apple 账号", "leehaozhen@gmail 账号"];
+// let selection = dialogs.select("选择账号方式", titles);
+// let players = [];
+// if (selection == 0) {
+//   titles = ["全部", "calbeec", "Mamair"];
+//   selection = dialogs.select("请选择", titles);
+//   if (selection === 0) {
+//     players = Account.apple;
+//   } else if (selection === 1) {
+//     players = [calbeec];
+//   } else {
+//     players = [Mamair];
+//   }
+// } else {
+//   players = Account.google;
+// }
 
-// let players = Account.google;
+let players = Account.google;
 for (var i = 0; i < players.length; i++) {
   var _player = players[i];
 
-  Root.missionMenu.checkClick();
-  MissionMenu.quickDungeon.checkClick();
-  Dungeon.quick.pirate.checkClick();
-  Dungeon.pirate.exec(_player);
-  Dungeon.quick.pyramid.checkClick();
-  Dungeon.pyramid.exec(_player);
-  Dungeon.quick.daily.checkClick();
+  // Root.missionMenu.checkClick();
+  // MissionMenu.quickDungeon.checkClick();
+
+  // Dungeon.quick.pirate.checkClick();
+  // Dungeon.pirate.exec(_player);
+  // Dungeon.quick.pyramid.checkClick();
+  // Dungeon.pyramid.exec(_player);
+  // Dungeon.quick.daily.checkClick();
   Dungeon.daily.exec(_player);
-  Dungeon.quick.mini.checkClick();
-  Dungeon.mini.exec(_player);
-  Dungeon.quick.elite.checkClick();
-  Dungeon.elite.exec(_player);
-  if (_player.hasGuild) {
-    Dungeon.quick.guild.checkClick();
-    Dungeon.guild.exec(_player);
-  }
-  Dungeon.quick.wuling.checkClick();
-  Dungeon.wuling.exec(_player);
-  Dungeon.quick.evolution.checkClick();
-  Dungeon.evolution.exec(_player);
+  // Dungeon.quick.mini.checkClick();
+  // Dungeon.mini.exec(_player);
+  // Dungeon.quick.elite.checkClick();
+  // Dungeon.elite.exec(_player);
+  // if (_player.hasGuild) {
+  //   Dungeon.quick.guild.checkClick();
+  //   Dungeon.guild.exec(_player);
+  // }
+  // Dungeon.quick.wuling.checkClick();
+  // Dungeon.wuling.exec(_player);
+  // Dungeon.quick.evolution.checkClick();
+  // Dungeon.evolution.exec(_player);
 
   sleep(5000);
   Dungeon.quick.close.click();

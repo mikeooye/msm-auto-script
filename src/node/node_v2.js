@@ -11,12 +11,12 @@ var Point2 = function (x, y, color) {
       image = images.captureScreen();
     }
     if (images.detectsColor(image, this.color, this.x * rate, this.y * rate)) {
-      console.log('匹配颜色', this.x, this.y);
+      console.log("匹配颜色", this.x, this.y);
       return true;
     }
 
     let realColor = images.pixel(image, this.x * rate, this.y * rate);
-    console.log('颜色不匹配', this.x, this.y, colors.toString(realColor));
+    console.log("颜色不匹配", this.x, this.y, colors.toString(realColor));
     return false;
   };
 
@@ -33,6 +33,7 @@ var Window2 = function (points) {
   this.points = points;
 
   this.wait = function (duration) {
+    duration = duration || 10000000;
     duration += 100;
     var beginTime = new Date().getTime();
     var image = images.captureScreen();
@@ -51,18 +52,19 @@ var Window2 = function (points) {
         return true;
       } else {
         // 匹配失败，继续下一轮循环
+        sleep(2000);
+        image = images.captureScreen();
       }
-      sleep(1000);
     }
     // 超时匹配失败
     return false;
   };
 
-  this.waitClick = function(duration, point) {
+  this.waitClick = function (duration, point) {
     if (this.wait(duration)) {
       point.click();
     }
-  }
+  };
 };
 
 module.exports = {
