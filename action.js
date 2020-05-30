@@ -4,7 +4,7 @@ var prepare = function () {
     toast("请求截图失败");
     exit();
   }
-  sleep(2000);
+  sleep(1000);
 };
 
 module.exports = {

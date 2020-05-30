@@ -1,67 +1,95 @@
-var Node = require("../../node/node");
+var Node = require("../../node/node_v2");
 var Color = require("../../color");
 var Root = require("../root");
 var MissionMenu = require("../missionMenu");
 
-// 公会
-var identifier = [
-  // 窗口蓝灰色标题栏
-  new Node.BaseNode(97, 79, Color.blueGrey),
-  // 右下角蓝色按钮
-  new Node.BaseNode(366, 358, "#d3d6d9"),
-];
-
-var dungeonIdentifier = [new Node.BaseNode(400, 82, Color.blueGrey), new Node.BaseNode(923, 712, Color.blue)];
-
-var settleId = [new Node.BaseNode(486, 605, Color.blue), new Node.BaseNode(772, 608, Color.orange)];
-
-var giveIdentifier = [new Node.BaseNode(131, 75, Color.blueGrey), new Node.BaseNode(947, 566, Color.orange)];
-
 module.exports = {
-  // 主窗口
-  mainWindow: new Node.ViewNode(identifier, 0, 0, true, 10000),
-  // 返回
-  back: new Node.BaseNode(43, 73),
-  close: new Node.BaseNode(1243, 80),
-  sign: new Node.BaseNode(1180, 283),
-  dungeon: new Node.BaseNode(798, 532),
-  dungeonWindow: new Node.ViewNode(dungeonIdentifier, 0, 0, true, 5000),
-  dungeonBonus: new Node.BaseNode(1181, 712),
-  dungeonGo: new Node.ViewNode(dungeonIdentifier.concat([new Node.BaseNode(559, 699, Color.orange)]), 519, 703, true, 5000),
-  give: new Node.BaseNode(1178, 698),
-  // 结算窗口
-  settlementWindow: new Node.ViewNode(settleId, 0, 0, true),
-  continue: new Node.BaseNode(827, 601),
-  menu: new Node.BaseNode(640, 609),
-  // 结算窗口返回到主窗口
-  backToMainWindow: new Node.BaseNode(623, 677),
-  giveWindow: new Node.ViewNode(giveIdentifier, 0, 0, true, 5000),
-  give150: new Node.BaseNode(1059, 580),
+  desc: "公会任务",
+  delay: 3000,
+  statusBar: new Node.Point(97, 79, { color: "#515f6e", desc: "标题栏" }),
+  signStatusBar: new Node.Point(734, 163, {
+    color: "#515f6e",
+    desc: "签到状态栏",
+  }),
+  rootWindow: function () {
+    return new Node.Window([this.statusBar, this.signStatusBar]);
+  },
+  backButton: new Node.Point(43, 73, { desc: "返回按钮" }),
+  exitButton: new Node.Point(1243, 80, { desc: "关闭按钮" }),
+  signButton: new Node.Point(1180, 283, { desc: "签到按钮", delay: 1000 }),
+  dungeonButton: new Node.Point(798, 532, { desc: "副本任务按钮" }),
+  giftButon: new Node.Point(1178, 698, {
+    desc: "捐献公会积分按钮",
+    delay: 3000,
+  }),
+  dungeonStatusBar: new Node.Point(400, 82, {
+    color: "#515f6e",
+    desc: "公会任务窗口状态栏",
+  }),
+  dungeonBlueButton: new Node.Point(923, 712, {
+    color: "#548fba",
+    desc: "公会任务右下角蓝色按钮",
+  }),
+  dungeonWindow: function () {
+    return new Node.Window([this.dungeonStatusBar, this.dungeonBlueButton]);
+  },
+  dungeonBonusButton: new Node.Point(1181, 712, {
+    desc: "公会任务领取奖励",
+    delay: 1000,
+  }),
+  dungeonStartButon: new Node.Point(559, 699, {
+    color: Color.orange,
+    desc: "公会任务进入按钮",
+  }),
+  dungeonSettleExitButton: new Node.Point(518, 600, {
+    color: "#548fba",
+    desc: "公会任务结算退出",
+  }),
+  dungeonSettleMenuButton: new Node.Point(716, 600, {
+    color: "#59b0a8",
+    desc: "公会任务结算菜单",
+    delay: 3000,
+  }),
+  dungeonSettleContinueButton: new Node.Point(887, 600, {
+    color: Color.orange,
+    desc: "公会任务结算继续按钮",
+  }),
+  dungeonSettleWindow: function () {
+    return new Node.Window([
+      this.dungeonSettleExitButton,
+      this.dungeonSettleMenuButton,
+      this.dungeonSettleContinueButton,
+    ]);
+  },
+  giveGiftButton: new Node.Point(1054, 592, { desc: "提交 150 积分" }),
 
   exec: function (player) {
-    this.mainWindow.wait();
-    // 新活动，welcome 欢迎语
-    sleep(5000);
+    console.log("进行任务", this.desc);
+    this.rootWindow().wait();
+    sleep(this.delay);
     // 签到
-    this.sign.click();
-    this.dungeon.click();
-    this.dungeonWindow.wait();
-    this.dungeonBonus.click();
+    this.signButton.click();
+
+    // 公会任务
+    this.dungeonButton.click();
+    this.dungeonWindow().wait();
+    this.dungeonBonusButton.click();
     while (1) {
-      if (!this.dungeonGo.checkClick()) {
+      if (!this.dungeonStartButon.match(images.captureScreen())) {
         break;
       }
-      this.settlementWindow.wait();
-      this.menu.click();
+      this.dungeonStartButon.click();
+      this.dungeonSettleWindow().wait();
+      this.dungeonSettleMenuButton.click();
     }
 
-    this.back.click();
+    this.backButton.click();
 
-    this.mainWindow.wait();
-    this.give.click();
-    this.giveWindow.wait();
-    this.give150.click();
-    this.close.click();
+    this.rootWindow().wait();
+    // 捐献积分
+    this.giftButon.click();
+    this.giveGiftButton.click();
+    this.exitButton.click();
 
     Root.missionMenu.checkClick();
     MissionMenu.quickDungeon.checkClick();

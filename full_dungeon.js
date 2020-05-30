@@ -28,22 +28,22 @@ for (var i = 0; i < players.length; i++) {
       }
       case Key.pirate: {
         Dungeon.quick.pirate.checkClick();
-        Dungeon.pirate.exec(_player, 1);
+        Dungeon.pirate.exec(_player);
         break;
       }
       case Key.pyramid: {
         Dungeon.quick.pyramid.checkClick();
-        Dungeon.pyramid.exec(_player, 1);
+        Dungeon.pyramid.exec(_player);
         break;
       }
       case Key.mini: {
         Dungeon.quick.mini.checkClick();
-        Dungeon.mini.exec(_player, 1);
+        Dungeon.mini.exec(_player);
         break;
       }
       case Key.elite: {
         Dungeon.quick.elite.checkClick();
-        Dungeon.elite.exec(_player, 1);
+        Dungeon.elite.exec(_player);
         break;
       }
       case Key.guild: {
@@ -53,12 +53,12 @@ for (var i = 0; i < players.length; i++) {
       }
       case Key.wuling: {
         Dungeon.quick.wuling.checkClick();
-        Dungeon.wuling.exec(_player, 1);
+        Dungeon.wuling.exec(_player);
         break;
       }
       case Key.evolution: {
         Dungeon.quick.evolution.checkClick();
-        Dungeon.evolution.exec(_player, 1);
+        Dungeon.evolution.exec(_player);
         break;
       }
       default:

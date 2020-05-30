@@ -1,131 +1,83 @@
 var Node = require("../../node/node_v2");
 var Color = require("../../color");
 
-// var identifiers = [
-//   // 标题栏蓝灰色
-//   new Node.BaseNode(374, 80, Color.blueGrey),
-//   // options 黄色
-//   new Node.BaseNode(1002, 629, Color.yellow),
-// ];
-
-// // 确认弹窗标识
-// var goIdentifiers = [
-//   // 门票底部的灰色
-//   new Node.BaseNode(805, 479, Color.grey),
-//   // 取消蓝色
-//   new Node.BaseNode(582, 560, Color.blue),
-//   // 确认橙色
-//   new Node.BaseNode(872, 569, Color.orange),
-// ];
-
-// var continueIdentifiers = [
-//   new Node.BaseNode(499, 542, Color.blue),
-//   new Node.BaseNode(706, 543, Color.cyan),
-//   new Node.BaseNode(892, 534, Color.orange),
-// ];
-
 module.exports = {
-  // go: new Node.ViewNode(
-  //   identifiers.concat([new Node.BaseNode(1198, 686, Color.orange)]),
-  //   1131,
-  //   706,
-  //   true,
-  //   5000
-  // ),
-  // // 返回按钮
-  // back: new Node.ViewNode(identifiers, 38, 86, true, 5000),
-  // // 退出按钮
-  // quit: new Node.ViewNode(identifiers, 1238, 79),
-  // // 经验宝石奖赏
-  // expOption: new Node.ViewNode(identifiers, 895, 194),
-  // // 进入确认
-  // goConfirm: new Node.ViewNode(goIdentifiers, 787, 567, true, 5000),
-  // // 取消进入
-  // goCancel: new Node.ViewNode(
-  //   // 没有门票时，标题栏会出现黑色阴影
-  //   [new Node.BaseNode(728, 192, "#14181c")].concat(goIdentifiers),
-  //   484,
-  //   569,
-  //   true,
-  //   3000
-  // ),
-  // // 再来一次
-  // continue: new Node.ViewNode(continueIdentifiers, 834, 543, true),
-  // // 返回菜单
-  // menu: new Node.ViewNode(continueIdentifiers, 643, 542, true),
-  // // 离开
-  // leave: new Node.ViewNode(continueIdentifiers, 456, 542, true),
-
-  statusBar: new Node.Point(374, 80, "#515f6e"),
-  optionBottom: new Node.Point(1002, 629, "#ff5741"),
-  go: new Node.Point(1198, 686, "#ff7b50"),
-  back: new Node.Point(38, 86),
-  exit: new Node.Point(1238, 79),
-  expOption: new Node.Point(895, 194),
+  statusBar: new Node.Point(374, 80, { color: "#515f6e", desc: "标题栏" }),
+  optionBottom: new Node.Point(946, 627, {
+    color: "#ffd741",
+    desc: "选择项底部颜色",
+  }),
+  go: new Node.Point(1198, 686, {
+    color: "#ff7b50",
+    desc: "进入按钮",
+    delay: 1000,
+  }),
+  back: new Node.Point(38, 86, { desc: "返回按钮", delay: 4000 }),
+  exit: new Node.Point(1238, 79, { desc: "退出按钮" }),
+  // expOption: new Node.Point(895, 194, { desc: "经验选择按钮" }),
+  expOption: new Node.Point(895, 194, { desc: "经验选项按钮" }),
   mainWindow: function () {
-    return new Node.Window(this.statusBar, this.optionBottom, this.go);
+    return new Node.Window([this.statusBar, this.optionBottom, this.go]);
   },
-  confirmTicketBottom: new Node.Point(805, 479, "#747474"),
-  confirmCancel: new Node.Point(582, 560, "#548fba"),
-  confirmOk: new Node.Point(872, 569, "#ff7b50"),
-  confirmNoTicketShadow: new Node.Point(728, 192, "#14181c"),
+  confirmTicketBottom: new Node.Point(805, 479, {
+    color: "#747474",
+    desc: "确认门票底色",
+  }),
+  confirmCancel: new Node.Point(582, 560, {
+    color: "#548fba",
+    desc: "确认取消按钮",
+    delay: 2000,
+  }),
+  confirmOk: new Node.Point(872, 569, {
+    color: "#ff7b50",
+    desc: "确认ok按钮",
+    delay: 2000,
+  }),
   confirmWindow: function () {
-    return new Node.Window(
-      this.confirmTicketBottom,
-      this.confirmCancel,
-      this.confirmOk
-    );
+    return new Node.Window([this.confirmCancel, this.confirmOk]);
   },
-  settleContinue: new Node.Point(880, 543, Color.orange),
-  settleMenu: new Node.Point(706, 543, Color.teal),
-  settleExit: new Node.Point(499, 542, "#548fba"),
+  settleContinue: new Node.Point(880, 543, {
+    color: Color.orange,
+    desc: "结算继续按钮",
+    delay: 2000,
+  }),
+  settleMenu: new Node.Point(706, 543, {
+    color: Color.teal,
+    desc: "结算菜单按钮",
+  }),
   settleWindow: function () {
-    return new Node.Window([
-      this.settleContinue,
-      this.settleMenu,
-      this.settleExit,
-    ]);
+    return new Node.Window([this.settleContinue, this.settleMenu]);
+  },
+  pickOption: function () {
+    // 韩国时间
+    var now = new Date(+new Date() + 60 * 60 * 1000);
+    if (now.getDay() === 0 || now.getDay() === 6) {
+      // 周末，自主选择 boss，选择经验 boss
+      this.expOption.click();
+    }
   },
 
   exec: function () {
     while (1) {
       if (this.mainWindow().wait()) {
-        // 韩国时间
-        var now = new Date(+new Date() + 60 * 60 * 1000);
-        if (now.getDay() === 0 || now.getDay() === 6) {
-          // 周末，自主选择 boss，选择经验 boss
-          this.expOption.click();
-        }
+        this.pickOption();
 
         this.go.click();
-        sleep(1000);
 
-        if (this.confirmWindow().wait()) {
-          this.confirmOk.click();
-          sleep(1000);
-          if (this.confirmNoTicketShadow.match(images.captureScreen())) {
-            //没有门票，需返回
-            this.confirmCancel.click();
-            this.back.click();
-            break;
-          }
-          sleep(2500);
-          if (this.settleWindow().wait()) {
-            this.settleMenu.click();
-            sleep(4000);
-          }
+        this.confirmWindow().wait();
+        this.confirmOk.click();
+        sleep(2000);
+        if (this.confirmWindow().wait(2000)) {
+          //没有门票，需返回
+          this.confirmCancel.click();
+          break;
         }
+
+        this.settleWindow().wait();
+        this.settleMenu.click();
       }
-      // if (ret) {
-      //   this.go.checkClick();
-      //   this.goConfirm.checkClick();
-      //   // 捕捉没有门票提醒，如果命中，则关闭弹窗并返回
-      //   if (this.goCancel.checkClick()) {
-      //     this.back.checkClick();
-      //     break;
-      //   }
-      //   this.menu.checkClick();
-      // }
     }
+    this.mainWindow().wait();
+    this.back.click();
   },
 };

@@ -14,4 +14,17 @@ module.exports = {
   blue: "#548fba",
   teal: "#59b0a8",
   black: "#000000",
+  /**
+   * 青绿色
+   */
+  cyan_59b0a8: "#59b0a8",
+  /**
+   * 蓝色
+   */
+  blue_548fba: "#548fba",
+  /**
+   * 橘黄色
+   */
+
+  orange_ff7b50: "#ff7b50",
 };

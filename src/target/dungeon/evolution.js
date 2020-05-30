@@ -1,64 +1,91 @@
-var Node = require("../../node/node");
+var Node = require("../../node/node_v2");
 var Color = require("../../color");
 
-// 进化系统
-var identifier = [
-  // 窗口蓝灰色标题栏
-  new Node.BaseNode(442, 79, Color.blueGrey),
-  // 右下角蓝色按钮
-  new Node.BaseNode(1077, 705, Color.orange),
-];
-
-var confirmIdentifier = [new Node.BaseNode(807, 452, "#7f7f7f"), new Node.BaseNode(520, 686, Color.blue)];
-
-var settleIdentifier = [new Node.BaseNode(489, 609, Color.blue), new Node.BaseNode(701, 609, "#59b0a8")];
-
 module.exports = {
-  // 主窗口
-  mainWindow: new Node.ViewNode(identifier, 0, 0, true, 10000),
-  // 返回
-  back: new Node.BaseNode(43, 73),
-  op2: new Node.BaseNode(236, 378),
-  masterLevelTab: new Node.BaseNode(373, 249),
-  bossTab: new Node.BaseNode(510, 255),
-  // 进入
-  go: new Node.BaseNode(1108, 708),
-  // 确认弹窗
-  confirmWindow: new Node.ViewNode(confirmIdentifier, 0, 0, true, 10000),
-  // 确认按钮
-  confirm: new Node.BaseNode(791, 686),
-  cancel: new Node.ViewNode([new Node.BaseNode(785, 184, "#3d3d3d")].concat(confirmIdentifier), 477, 684, true, 5000),
-  // 结算窗口
-  settlementWindow: new Node.ViewNode(settleIdentifier, 0, 0, true),
-  // 结算窗口返回到主窗口
-  backToMainWindow: new Node.BaseNode(654, 611),
+  desc: "进化系统",
+  statusBar: new Node.Point(442, 79, {
+    color: "#515f6e",
+    desc: "标题栏背景色",
+  }),
+  quickStartButton: new Node.Point(1077, 705, {
+    color: Color.orange,
+    desc: "快速开始按钮",
+    delay: 1000,
+  }),
+  backButton: new Node.Point(43, 73, { desc: "返回上级按钮" }),
+  rootWindow: function () {
+    return new Node.Window([this.statusBar, this.quickStartButton]);
+  },
+  secondOption: new Node.Point(236, 378, { desc: "第二个选项" }),
+  monsterTab: new Node.Point(373, 249, { desc: "怪物等级 tab" }),
+  bossTab: new Node.Point(510, 255, { desc: "boss tab" }),
+  confirmStatusBar: new Node.Point(807, 452, {
+    color: "#7f7f7f",
+    desc: "确认窗口状态栏",
+  }),
+  confirmCancelButton: new Node.Point(520, 686, {
+    color: "#548fba",
+    desc: "确认窗口取消按钮",
+    delay: 2000,
+  }),
+  confirmConfirmButton: new Node.Point(791, 686, {
+    desc: "确认窗口确认按钮",
+    delay: 3000,
+  }),
+  noTicketsPoint: new Node.Point(500, 171, {
+    color: "#14181c",
+    desc: "门票已经用完",
+  }),
+  confirmWindow: function () {
+    return new Node.Window([this.confirmCancelButton, this.confirmStatusBar]);
+  },
+  settleExitButton: new Node.Point(486, 597, {
+    color: "#548fba",
+    desc: "结算退出按钮",
+  }),
+  settleMenuButton: new Node.Point(697, 609, {
+    color: "#59b0a8",
+    desc: "结算菜单按钮",
+    delay: 4000,
+  }),
+  settleContinueButton: new Node.Point(878, 611, {
+    desc: "返回菜单按钮",
+    color: "#ff7b50",
+    delay: 3000,
+  }),
+  settleWindow: function () {
+    return new Node.Window([
+      this.settleExitButton,
+      this.settleMenuButton,
+      this.settleContinueButton,
+    ]);
+  },
 
   exec: function (player, times) {
+    console.log("正在进行副本", this.desc);
     var _times = times || 100;
     while (_times) {
-      if (!this.mainWindow.wait()) {
-        break;
-      }
-      this.op2.click();
-      this.masterLevelTab.click();
-      this.op2.click();
-      this.bossTab.click();
-      this.op2.click();
-      // 进入
-      this.go.click();
-      // 确认弹窗
-      if (!this.confirmWindow.wait()) {
-        break;
-      }
-      // 确认进入，此时会出现没有票无法进入的情况
-      this.confirm.click();
-      // 等待结算
-      this.settlementWindow.wait();
-      this.backToMainWindow.click();
-
       _times -= 1;
+      this.rootWindow().wait();
+      this.secondOption.click();
+      this.monsterTab.click();
+      this.secondOption.click();
+      this.bossTab.click();
+      this.secondOption.click();
+
+      this.quickStartButton.click();
+      if (this.noTicketsPoint.match(images.captureScreen())) {
+        break;
+      }
+
+      this.confirmWindow().wait();
+      this.confirmConfirmButton.click();
+
+      this.settleWindow().wait();
+      this.settleMenuButton.click();
     }
 
-    this.back.click();
+    this.rootWindow().wait();
+    this.backButton.click();
   },
 };

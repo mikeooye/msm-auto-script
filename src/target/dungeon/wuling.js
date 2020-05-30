@@ -1,60 +1,85 @@
-var Node = require("../../node/node");
+var Node = require("../../node/node_v2");
 var Color = require("../../color");
 
-// 武陵
-var identifier = [
-  // 窗口蓝灰色标题栏
-  new Node.BaseNode(409, 83, Color.blueGrey),
-  // 右下角蓝色按钮
-  new Node.BaseNode(755, 702, Color.blue),
-];
-
-var confirmIdentifier = [new Node.BaseNode(521, 515, "#7f7f7f"), new Node.BaseNode(532, 680, Color.blue)];
-
-var settleIdentifier = [new Node.BaseNode(727, 168, "#FFFFDE"), new Node.BaseNode(494, 677, Color.blue)];
-
 module.exports = {
-  // 主窗口
-  mainWindow: new Node.ViewNode(identifier, 0, 0, true, 10000),
-  // 返回
-  back: new Node.BaseNode(43, 73),
-  // 进入
-  go: new Node.BaseNode(1108, 708),
-  // 确认弹窗
-  confirmWindow: new Node.ViewNode(confirmIdentifier, 0, 0, true, 10000),
-  // 确认按钮
-  confirm: new Node.BaseNode(791, 686),
-  cancel: new Node.ViewNode([new Node.BaseNode(785, 184, "#3d3d3d")].concat(confirmIdentifier), 477, 684, true, 5000),
-  // 结算窗口
-  settlementWindow: new Node.ViewNode(settleIdentifier, 0, 0, true),
-  // 结算窗口返回到主窗口
-  backToMainWindow: new Node.BaseNode(623, 677),
+  desc: "武陵道场",
+  mondayStatusBar: new Node.Point(774, 96, {
+    color: "#515f6e",
+    desc: "周一奖励标题栏",
+  }),
+  mondayConfirmButton: new Node.Point(684, 681, {
+    color: Color.orange,
+    desc: "周一奖励确认按钮",
+  }),
+  mondayWindow: function () {
+    return new Node.Window([this.mondayStatusBar, this.mondayConfirmButton]);
+  },
+  statusBar: new Node.Point(409, 83, {
+    color: "#515f6e",
+    desc: "标题栏背景色",
+  }),
+  shopButton: new Node.Point(755, 702, { color: "#548fba", desc: "商店按钮" }),
+  rootWindow: function () {
+    return new Node.Window([this.statusBar, this.shopButton]);
+  },
+  backButton: new Node.Point(43, 73, { desc: "返回按钮" }),
+  goButton: new Node.Point(1108, 708, { desc: "入场", delay: 2000 }),
+  confirmStatusBar: new Node.Point(735, 100, {
+    color: "#515f6e",
+    desc: "确认标题栏",
+  }),
+  confirmCancelButton: new Node.Point(530, 680, {
+    color: "#548fba",
+    desc: "取消按钮",
+  }),
+  confirmOkButton: new Node.Point(820, 680, { desc: "确认按钮" }),
+  noTicketPoint: new Node.Point(516, 171, {
+    color: "#3d3d3d",
+    desc: "无门票点色",
+  }),
+  confirmWindow: function () {
+    return new Node.Window([this.confirmStatusBar, this.confirmCancelButton]);
+  },
+  settleStatusBar: new Node.Point(727, 168, {
+    color: "#ffffde",
+    desc: "结算标题栏",
+  }),
+  settleBack: new Node.Point(494, 677, {
+    color: "#548fba",
+    desc: "结算退出按钮",
+  }),
+  settleMenu: new Node.Point(623, 677, { desc: "结算菜单按钮", delay: 3000 }),
+  settleWindow: function () {
+    return new Node.Window([this.settleStatusBar, this.settleBack]);
+  },
 
   exec: function (player, times) {
+    console.log("当前进行", this.desc);
+    if (this.mondayWindow().wait(2000)) {
+      this.mondayConfirmButton.click();
+    }
     var _times = times || 100;
     while (_times) {
-      if (!this.mainWindow.wait()) {
-        break;
-      }
+      this.rootWindow().wait();
       // 进入
-      this.go.click();
+      this.goButton.click();
       // 确认弹窗
-      if (!this.confirmWindow.wait()) {
-        break;
-      }
+      this.confirmWindow().wait();
       // 确认进入，此时会出现没有票无法进入的情况
-      this.confirm.click();
+      this.confirmOkButton.click();
 
-      if (this.cancel.checkClick()) {
+      if (this.noTicketPoint.match(images.captureScreen())) {
         // 没有票，退出循环
+        this.confirmCancelButton.click();
         break;
       }
       // 等待结算
-      this.settlementWindow.wait();
-      this.backToMainWindow.click();
+      this.settleWindow().wait();
+      this.settleMenu.click();
       _times -= 1;
     }
 
-    this.back.click();
+    this.rootWindow().wait();
+    this.backButton.click();
   },
 };
